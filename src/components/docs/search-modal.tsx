@@ -23,18 +23,20 @@ export function SearchModal({ open, onClose, items }: SearchModalProps) {
   React.useEffect(() => {
     if (open) {
       setQuery("");
-      setTimeout(() => inputRef.current?.focus(), 10);
+      const raf = requestAnimationFrame(() => inputRef.current?.focus());
+      return () => cancelAnimationFrame(raf);
     }
   }, [open]);
 
-  // Close on Escape
+  // Close on Escape — only when modal is open
   React.useEffect(() => {
+    if (!open) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [open, onClose]);
 
   const results = items.filter((item) =>
     item.label.toLowerCase().includes(query.toLowerCase()) ||
