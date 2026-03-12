@@ -70,8 +70,8 @@ export function Button({
     <button
       className={cn(base, sizes[size], variants[variant][color], className)}
       disabled={disabled || loading}
-      aria-busy={loading}
       {...props}
+      aria-busy={loading}
       aria-disabled={disabled || loading}
     >
       {loading ? (

@@ -49,11 +49,16 @@ export function Card({
   );
 }
 
+export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+
 export function CardHeader({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: CardHeaderProps) {
   return (
     <div className={cn("mb-4", className)} {...props}>
       {children}
@@ -65,7 +70,7 @@ export function CardTitle({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+}: CardTitleProps) {
   return (
     <h3
       className={cn("text-base font-semibold text-grey-100 dark:text-grey-10", className)}
@@ -80,7 +85,7 @@ export function CardDescription({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
+}: CardDescriptionProps) {
   return (
     <p
       className={cn("text-sm text-grey-70 dark:text-grey-50 mt-1", className)}
@@ -95,7 +100,7 @@ export function CardFooter({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: CardFooterProps) {
   return (
     <div
       className={cn("mt-4 flex items-center gap-2", className)}
