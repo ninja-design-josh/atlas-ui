@@ -46,6 +46,7 @@ export function Switch({
         type="button"
         role="switch"
         aria-checked={isChecked}
+        aria-labelledby={label ? `${switchId}-label` : undefined}
         aria-describedby={description ? `${switchId}-desc` : undefined}
         disabled={disabled}
         onClick={handleChange}
@@ -69,7 +70,7 @@ export function Switch({
         <div className="flex flex-col gap-0.5">
           {label && (
             <label
-              htmlFor={switchId}
+              id={`${switchId}-label`}
               className={cn(
                 "text-sm font-medium text-grey-100 dark:text-grey-10 leading-none cursor-pointer",
                 disabled && "cursor-not-allowed opacity-50"
