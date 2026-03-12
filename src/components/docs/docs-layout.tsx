@@ -19,7 +19,7 @@ interface DocsLayoutProps {
 
 const statusColors: Record<ComponentStatus, string> = {
   stable: "bg-green-100",
-  beta:   "bg-yellow-100",
+  beta:   "bg-yellow-50",
   draft:  "bg-grey-30",
 };
 
