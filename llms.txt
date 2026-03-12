@@ -1,0 +1,62 @@
+# Atlas UI
+
+> NinjaCat's source-of-truth component library. Built with Next.js 15, React 19, TypeScript, and Tailwind CSS v4. Use this library to build consistent NinjaCat product UI.
+
+Atlas UI implements the NinjaCat Bento design system. All components use the design tokens defined in `src/app/globals.css`. The library is the source of truth — Figma reflects it, not the other way around.
+
+## Quick Start
+
+All components live in `src/components/ui/`. Import with:
+```tsx
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+// etc.
+```
+
+Full machine-readable spec: `src/registry.json`
+Full AI context: `CLAUDE.md`
+
+## Components
+
+- **Button** (`@/components/ui/button`) — action trigger. Props: variant (solid/outlined/ghost), color (primary/secondary/danger), size (sm/md/lg), loading, leftIcon, rightIcon
+- **Input** (`@/components/ui/input`) — text input. Props: label, hint, error, leadingIcon, trailingIcon
+- **Textarea** (`@/components/ui/textarea`) — multi-line input. Props: label, hint, error, rows
+- **Select** (`@/components/ui/select`) — native dropdown. Props: options (required), label, placeholder, hint, error
+- **Checkbox** (`@/components/ui/checkbox`) — boolean toggle for forms. Props: label, description, checked, defaultChecked, onChange
+- **Switch** (`@/components/ui/switch`) — immediate-effect toggle. Props: label, description, checked, defaultChecked, onChange
+- **Badge** (`@/components/ui/badge`) — status/label indicator. Props: variant (default/success/warning/error/info/purple), size, dot, status (adds role="status" for live regions)
+- **Avatar** (`@/components/ui/avatar`) — user representation. Props: src, initials, alt (strongly recommended), size (sm/md/lg/xl)
+- **Card** (`@/components/ui/card`) — surface container. Props: padding (none/sm/md/lg), border, elevation (0/1/2/4/8). Compose with CardHeader, CardTitle, CardDescription, CardFooter.
+
+## Design Tokens
+
+Defined in `src/app/globals.css` under `@theme {}`. Always use semantic tokens:
+
+- Text: `text-text-primary`, `text-text-secondary`, `text-text-error`, `text-text-link`
+- Surface: `bg-surface`, `bg-surface-subtle`, `bg-surface-raised`
+- Border: `border-border`, `border-border-strong`
+- Dark mode: class-based (`class="dark"` on `<html>`) — all semantic tokens update automatically
+
+## Prop Conventions
+
+- `variant` — visual style (solid/outlined/ghost)
+- `color` — semantic color role (primary/secondary/danger)
+- `size` — dimensions (sm/md/lg)
+- Icon props: `leftIcon`/`rightIcon` on buttons, `leadingIcon`/`trailingIcon` on inputs
+- `className` — always last, always safe to pass (uses clsx + tailwind-merge)
+
+## Do / Don't
+
+- DO: Use solid/primary for the single main CTA
+- DO: Use outlined/secondary for cancel actions
+- DO: Always provide `alt` on Avatar
+- DON'T: Use two solid/primary buttons side by side
+- DON'T: Use danger color for non-destructive actions
+- DON'T: Use primitive tokens (grey-100) for semantic purposes — use text-text-primary
+
+## Files
+
+- `src/registry.json` — full machine-readable component spec
+- `CLAUDE.md` — extended AI context and patterns
+- `src/app/globals.css` — all design tokens
+- `src/components/ui/` — all component source files
