@@ -3,6 +3,10 @@ import { cn } from "@/lib/utils";
 
 export type AvatarSize = "sm" | "md" | "lg" | "xl";
 
+/**
+ * Props for the Avatar component.
+ * @see Avatar
+ */
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   initials?: string;
@@ -17,6 +21,17 @@ const sizeStyles: Record<AvatarSize, string> = {
   xl: "h-14 w-14 text-base",
 };
 
+/**
+ * User avatar — shows image, initials, or a generic person icon as fallback.
+ *
+ * Always provide `alt` for accessibility. When no image is shown, `alt`
+ * becomes the `aria-label` on the container element.
+ *
+ * @example
+ * <Avatar src="/users/josh.jpg" alt="Josh Brinksman" size="md" />
+ * <Avatar initials="JB" alt="Josh Brinksman" size="lg" />
+ * <Avatar alt="Unknown user" size="sm" />
+ */
 export function Avatar({
   src,
   initials,

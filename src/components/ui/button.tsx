@@ -8,6 +8,10 @@ export type ButtonVariant = "solid" | "outlined" | "ghost";
 export type ButtonColor = "primary" | "secondary" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
+/**
+ * Props for the Button component.
+ * @see Button
+ */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -54,6 +58,22 @@ const variants: Record<ButtonVariant, Record<ButtonColor, string>> = {
   },
 };
 
+/**
+ * Primary action trigger for all clickable actions in NinjaCat UI.
+ *
+ * Use `solid` for the main CTA, `outlined` for secondary actions,
+ * `ghost` for low-emphasis tertiary actions.
+ *
+ * @example
+ * // Primary CTA
+ * <Button variant="solid" color="primary">Save Changes</Button>
+ *
+ * // Cancel action
+ * <Button variant="outlined" color="secondary">Cancel</Button>
+ *
+ * // Loading state
+ * <Button loading>Saving...</Button>
+ */
 export function Button({
   variant = "solid",
   color = "primary",

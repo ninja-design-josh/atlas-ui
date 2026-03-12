@@ -3,6 +3,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Textarea component.
+ * @see Textarea
+ */
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -10,6 +14,14 @@ export interface TextareaProps
   error?: string;
 }
 
+/**
+ * Multi-line text input with optional label, hint, and error state.
+ * Vertically resizable by default.
+ *
+ * @example
+ * <Textarea label="Description" hint="Max 500 characters." rows={5} />
+ * <Textarea label="Bio" error="Bio cannot be empty." />
+ */
 export function Textarea({
   label,
   hint,

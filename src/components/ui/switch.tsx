@@ -3,6 +3,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Switch component.
+ * @see Switch
+ */
 export interface SwitchProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
   label?: string;
@@ -12,6 +16,19 @@ export interface SwitchProps
   onChange?: (checked: boolean) => void;
 }
 
+/**
+ * Toggle switch for boolean settings. Supports controlled and uncontrolled modes.
+ *
+ * `onChange` receives the boolean checked value directly.
+ * Uses `role="switch"` and `aria-checked` for full screen reader support.
+ *
+ * @example
+ * // Uncontrolled
+ * <Switch label="Email notifications" description="Receive updates by email." />
+ *
+ * // Controlled
+ * <Switch label="Dark mode" checked={darkMode} onChange={setDarkMode} />
+ */
 export function Switch({
   label,
   description,

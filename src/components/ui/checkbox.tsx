@@ -4,6 +4,10 @@ import * as React from "react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Checkbox component.
+ * @see Checkbox
+ */
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {
   label?: string;
@@ -11,6 +15,16 @@ export interface CheckboxProps
   onChange?: (checked: boolean) => void;
 }
 
+/**
+ * Controlled or uncontrolled checkbox with label and description support.
+ *
+ * `onChange` receives the boolean checked value directly (not the native event).
+ * Pass native input attrs (name, value, required) — they flow through to the input.
+ *
+ * @example
+ * <Checkbox label="Accept terms" description="Required to continue." />
+ * <Checkbox label="Subscribe" checked={value} onChange={setValue} />
+ */
 export function Checkbox({
   label,
   description,

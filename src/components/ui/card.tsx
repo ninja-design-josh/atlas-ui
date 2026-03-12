@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 export type CardPadding = "none" | "sm" | "md" | "lg";
 export type CardElevation = 0 | 1 | 2 | 4 | 8;
 
+/**
+ * Props for the Card component.
+ * @see Card
+ */
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: CardPadding;
   border?: boolean;
@@ -25,6 +29,22 @@ const elevationStyles: Record<CardElevation, string> = {
   8: "shadow-elevation-8",
 };
 
+/**
+ * Surface container for grouping related content. Compose with
+ * CardHeader, CardTitle, CardDescription, and CardFooter.
+ *
+ * @example
+ * <Card padding="md" border elevation={1}>
+ *   <CardHeader>
+ *     <CardTitle>Settings</CardTitle>
+ *     <CardDescription>Manage your account preferences.</CardDescription>
+ *   </CardHeader>
+ *   <CardFooter>
+ *     <Button variant="outlined" color="secondary">Cancel</Button>
+ *     <Button variant="solid" color="primary">Save</Button>
+ *   </CardFooter>
+ * </Card>
+ */
 export function Card({
   padding = "md",
   border = true,
@@ -49,11 +69,16 @@ export function Card({
   );
 }
 
+/** Props for the CardHeader component. */
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+/** Props for the CardTitle component. */
 export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+/** Props for the CardDescription component. */
 export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+/** Props for the CardFooter component. */
 export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
+/** Header region of a Card. Adds bottom margin to separate from content. */
 export function CardHeader({
   children,
   className,
@@ -66,6 +91,7 @@ export function CardHeader({
   );
 }
 
+/** Primary heading for a Card. Renders as an `<h3>`. */
 export function CardTitle({
   children,
   className,
@@ -81,6 +107,7 @@ export function CardTitle({
   );
 }
 
+/** Secondary descriptive text below CardTitle. */
 export function CardDescription({
   children,
   className,
@@ -96,6 +123,7 @@ export function CardDescription({
   );
 }
 
+/** Footer region of a Card. Lays out actions in a row with gap. */
 export function CardFooter({
   children,
   className,

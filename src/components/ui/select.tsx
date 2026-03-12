@@ -4,12 +4,19 @@ import * as React from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * An individual option in a Select component.
+ */
 export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
 }
 
+/**
+ * Props for the Select component.
+ * @see Select
+ */
 export interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   label?: string;
@@ -19,6 +26,17 @@ export interface SelectProps
   placeholder?: string;
 }
 
+/**
+ * Native `<select>` styled to match Atlas UI.
+ * Pass `options` as `{ value, label, disabled? }[]`.
+ *
+ * @example
+ * <Select
+ *   label="Role"
+ *   options={[{ value: "admin", label: "Admin" }, { value: "viewer", label: "Viewer" }]}
+ *   placeholder="Select a role..."
+ * />
+ */
 export function Select({
   label,
   hint,

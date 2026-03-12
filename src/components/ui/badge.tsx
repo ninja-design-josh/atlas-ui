@@ -10,6 +10,10 @@ export type BadgeVariant =
   | "purple";
 export type BadgeSize = "sm" | "md";
 
+/**
+ * Props for the Badge component.
+ * @see Badge
+ */
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
   size?: BadgeSize;
@@ -40,6 +44,17 @@ const sizeStyles: Record<BadgeSize, string> = {
   md: "px-2   py-0.5 text-xs",
 };
 
+/**
+ * Small status or label indicator. Use `variant` to convey semantic meaning.
+ *
+ * Set `status={true}` to add `role="status"` for live-region announcements
+ * (e.g., a count that updates dynamically).
+ *
+ * @example
+ * <Badge variant="success">Active</Badge>
+ * <Badge variant="error" dot>3 errors</Badge>
+ * <Badge variant="info" status>Loading...</Badge>
+ */
 export function Badge({
   variant = "default",
   size = "md",

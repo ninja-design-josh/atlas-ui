@@ -3,6 +3,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Input component.
+ * @see Input
+ */
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
@@ -12,6 +16,17 @@ export interface InputProps
   trailingIcon?: React.ReactNode;
 }
 
+/**
+ * Text input field with optional label, hint, error, and icon support.
+ *
+ * Generates unique IDs automatically — do not pass `id` unless you need
+ * to reference it externally (e.g., for a custom label).
+ *
+ * @example
+ * <Input label="Email" hint="We'll never share this." placeholder="you@example.com" />
+ * <Input label="Username" error="Already taken." defaultValue="josh123" />
+ * <Input leadingIcon={<Search />} placeholder="Search..." />
+ */
 export function Input({
   label,
   hint,
