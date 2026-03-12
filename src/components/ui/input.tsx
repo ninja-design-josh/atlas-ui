@@ -65,7 +65,7 @@ export function Input({
           aria-describedby={errorId ?? hintId}
           aria-invalid={!!error}
           className={cn(
-            "h-10 w-full rounded-sm border bg-white px-3 text-sm text-grey-100 placeholder:text-grey-40 transition-colors",
+            "h-10 w-full rounded-sm border bg-surface px-3 text-sm text-grey-100 placeholder:text-grey-40 transition-colors",
             "focus:outline-none focus:border-blue-100",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-grey-5",
             "dark:bg-grey-110 dark:text-grey-10 dark:placeholder:text-grey-60 dark:border-grey-80",
@@ -80,7 +80,7 @@ export function Input({
           {...props}
         />
         {trailingIcon && (
-          <span className="pointer-events-none absolute right-3 flex h-4 w-4 items-center justify-center text-grey-50 dark:text-grey-40">
+          <span className="absolute right-3 flex h-4 w-4 items-center justify-center text-grey-50 dark:text-grey-40">
             {trailingIcon}
           </span>
         )}

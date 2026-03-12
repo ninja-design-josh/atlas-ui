@@ -151,7 +151,14 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  { type: "top-section", label: "Tokens",         href: "/tokens" },
+  {
+    type: "top-section",
+    label: "Tokens",
+    children: [
+      { type: "link", href: "/tokens/color",      label: "Color",      status: "stable" },
+      { type: "link", href: "/tokens/typography", label: "Typography", status: "stable" },
+    ],
+  },
   { type: "top-section", label: "Icons",          href: "/icons" },
   { type: "top-section", label: "Contributing",   href: "/contributing" },
   { type: "top-section", label: "Tools",          href: "/tools" },

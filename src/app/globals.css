@@ -72,7 +72,7 @@
   --color-text-white:     #FFFFFF;
 
   /* ─── Semantic — Icons ──────────────────────────────── */
-  --color-icon-primary:   #2D3540;
+  --color-icon-primary:   #545D6B;
   --color-icon-secondary: #697280;
   --color-icon-red:       #EB0057;
   --color-icon-green:     #239B2A;
@@ -117,7 +117,7 @@
   --color-surface-raised: #2D3540;
   --color-border:         #424A58;
   --color-border-strong:  #545D6B;
-  --color-icon-primary:   #E7EAEF;
+  --color-icon-primary:   #D5DAE1;
   --color-icon-secondary: #A8AEBA;
 }
 
@@ -136,19 +136,64 @@
     scroll-behavior: smooth;
   }
 
-  h1 { font-size: 2.5rem;  line-height: 1.2; font-weight: 700; }
-  h2 { font-size: 1.875rem; line-height: 1.25; font-weight: 700; }
-  h3 { font-size: 1.5rem;  line-height: 1.33; font-weight: 600; }
-  h4 { font-size: 1.25rem; line-height: 1.4;  font-weight: 600; }
+  /* Bento type scale — Figma node 640-5082 */
+  h1 { font-size: 2.125rem; line-height: 2.5rem;  font-weight: 700; letter-spacing: 0.03125rem; }
+  h2 { font-size: 1.5rem;   line-height: 1.875rem; font-weight: 700; letter-spacing: 0.01875rem; }
+  h3 { font-size: 1.125rem; line-height: 1.5rem;  font-weight: 700; letter-spacing: 0.01875rem; }
+  h4 { font-size: 0.875rem; line-height: 1.5rem;  font-weight: 700; letter-spacing: 0.03125rem; text-transform: uppercase; }
 
+  /* Links: no underline by default; prose content adds underline explicitly */
   a {
-    color: var(--color-text-link);
-    text-decoration: underline;
+    color: inherit;
+    text-decoration: none;
   }
 }
 
-/* ─── Documentation typography utilities ────────────────── */
+/* ─── Bento typography utilities ────────────────────────── */
 @layer utilities {
+  /* ── Button styles ─────────────────────────────────────── */
+  .text-btn-primary   { font-size: 0.875rem; line-height: 1;      font-weight: 500; }
+  .text-btn-secondary { font-size: 0.875rem; line-height: 1;      font-weight: 500; }
+  .text-btn-sm        { font-size: 0.8125rem; line-height: 1;     font-weight: 500; }
+  .text-btn-link      { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 400; }
+
+  /* ── Dropdown styles ───────────────────────────────────── */
+  .text-dropdown        { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 400; }
+  .text-dropdown-sm     { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 400; }
+
+  /* ── Form styles ───────────────────────────────────────── */
+  .text-form-default    { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 400; }
+  .text-form-label      { font-size: 0.8125rem; line-height: 1rem;     font-weight: 600; }
+  .text-form-sublabel   { font-size: 0.75rem;   line-height: 1rem;     font-weight: 400; }
+  .text-form-sublabel-bold { font-size: 0.75rem; line-height: 1rem;    font-weight: 600; }
+
+  /* ── Navigation styles ─────────────────────────────────── */
+  .text-nav-primary   { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 600; letter-spacing: 0.0125rem; }
+  .text-nav-secondary { font-size: 0.8125rem; line-height: 1;        font-weight: 600; }
+
+  /* ── Paragraph styles ──────────────────────────────────── */
+  .text-para          { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 400; }
+  .text-para-bold     { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 700; }
+
+  /* ── Table styles ──────────────────────────────────────── */
+  .text-table-primary      { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 400; }
+  .text-table-primary-bold { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 500; }
+  .text-table-secondary    { font-size: 0.75rem;   line-height: 1.125rem; font-weight: 400; }
+  .text-table-header       { font-size: 0.8125rem; line-height: 1rem;     font-weight: 700; }
+  .text-table-footer       { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 400; }
+  .text-table-footer-bold  { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 700; }
+  .text-table-subhead      { font-size: 0.8125rem; line-height: 1rem;     font-weight: 700; text-transform: uppercase; }
+
+  /* ── Tooltip styles ────────────────────────────────────── */
+  .text-tooltip-heading { font-size: 0.75rem; line-height: 1.125rem; font-weight: 700; }
+  .text-tooltip-text    { font-size: 0.75rem; line-height: 1.125rem; font-weight: 400; }
+
+  /* ── Avatar / User Control ─────────────────────────────── */
+  .text-avatar-initials   { font-size: 0.6875rem; line-height: 1.125rem; font-weight: 700; }
+  .text-account-name      { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 500; }
+  .text-user-name         { font-size: 0.875rem;  line-height: 1.125rem; font-weight: 600; }
+
+  /* ── Legacy utilities ──────────────────────────────────── */
   .text-overline {
     font-size: 0.75rem;
     line-height: 2.5;
@@ -161,6 +206,8 @@
     line-height: 1.66;
     font-weight: 400;
   }
+
+  /* ── Elevation shadows ─────────────────────────────────── */
   .shadow-elevation-0 { box-shadow: none; }
   .shadow-elevation-1 { box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12); }
   .shadow-elevation-2 { box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); }

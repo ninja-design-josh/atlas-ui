@@ -70,7 +70,7 @@ export function Select({
           aria-describedby={errorId ?? hintId}
           aria-invalid={!!error}
           className={cn(
-            "h-10 w-full appearance-none rounded-sm border bg-white px-3 pr-9 text-sm text-grey-100 transition-colors",
+            "h-10 w-full appearance-none rounded-sm border bg-surface px-3 pr-9 text-sm text-grey-100 transition-colors",
             "focus:outline-none focus:border-blue-100",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-grey-5",
             "dark:bg-grey-110 dark:text-grey-10 dark:border-grey-80",

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "figma:export-tokens": "npx tsx scripts/figma-push-tokens.ts",
-    "figma:push": "figma connect publish --token $FIGMA_TOKEN"
+    "figma:push": "figma connect publish --token $FIGMA_TOKEN",
+    "crawl": "npx tsx scripts/crawl-ninjacat.ts",
+    "check:ui": "npx tsx scripts/visual-check.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -24,8 +26,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.3.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "playwright": "^1.58.2",
     "tailwindcss": "^4.0.0",
     "typescript": "^5"
   }

@@ -56,7 +56,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-sm bg-white dark:bg-grey-110",
+        "rounded-sm bg-surface-raised",
         border && "border border-grey-10 dark:border-grey-90",
         paddingStyles[padding],
         elevationStyles[elevation],

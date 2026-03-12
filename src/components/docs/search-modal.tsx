@@ -76,9 +76,9 @@ export function SearchModal({ open, onClose, items }: SearchModalProps) {
           {results.map((result) => (
             <a
               key={result.id}
-              href={`#${result.id}`}
+              href={`/${result.id}`}
               onClick={onClose}
-              className="flex items-center gap-3 px-4 py-3 hover:bg-surface-subtle transition-colors border-b border-border last:border-0"
+              className="flex items-center gap-3 px-4 py-3 hover:bg-surface-subtle transition-colors border-b border-border last:border-0 no-underline"
             >
               <span className={cn(
                 "text-[10px] font-medium uppercase tracking-widest px-1.5 py-0.5 rounded shrink-0",

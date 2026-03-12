@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export type AvatarSize = "sm" | "md" | "lg" | "xl";
@@ -56,11 +57,12 @@ export function Avatar({
       {...props}
     >
       {!showFallback && (
-        <img
-          src={src}
+        <Image
+          src={src!}
           alt={alt}
+          fill
           onError={() => setImgError(true)}
-          className="h-full w-full object-cover"
+          className="object-cover"
         />
       )}
       {showFallback && initials && (

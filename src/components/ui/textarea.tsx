@@ -54,7 +54,7 @@ export function Textarea({
         aria-describedby={errorId ?? hintId}
         aria-invalid={!!error}
         className={cn(
-          "w-full rounded-sm border px-3 py-2 text-sm text-grey-100 placeholder:text-grey-40 bg-white",
+          "w-full rounded-sm border px-3 py-2 text-sm text-grey-100 placeholder:text-grey-40 bg-surface",
           "transition-colors resize-y",
           "focus:outline-none focus:border-blue-100",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-grey-5",
