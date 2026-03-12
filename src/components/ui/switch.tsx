@@ -3,15 +3,13 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface SwitchProps {
+export interface SwitchProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
   label?: string;
   description?: string;
   checked?: boolean;
   defaultChecked?: boolean;
-  disabled?: boolean;
-  id?: string;
   onChange?: (checked: boolean) => void;
-  className?: string;
 }
 
 export function Switch({
@@ -23,6 +21,7 @@ export function Switch({
   id,
   onChange,
   className,
+  ...props
 }: SwitchProps) {
   const generatedId = React.useId();
   const switchId = id ?? generatedId;
@@ -46,6 +45,7 @@ export function Switch({
         id={switchId}
         type="button"
         role="switch"
+        {...props}
         aria-checked={isChecked}
         aria-labelledby={label ? `${switchId}-label` : undefined}
         aria-describedby={description ? `${switchId}-desc` : undefined}
