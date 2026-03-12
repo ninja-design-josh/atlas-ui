@@ -1,0 +1,205 @@
+{
+  "$schema": "https://atlas-ui.ninjacat.io/registry-schema.json",
+  "version": "0.1.0",
+  "description": "Atlas UI component registry — NinjaCat's source-of-truth design system",
+  "components": [
+    {
+      "name": "Button",
+      "description": "Primary action trigger. Use for all clickable actions.",
+      "import": "@/components/ui/button",
+      "exports": ["Button", "ButtonProps", "ButtonVariant", "ButtonColor", "ButtonSize"],
+      "props": [
+        { "name": "variant", "type": "\"solid\" | \"outlined\" | \"ghost\"", "default": "\"solid\"", "description": "Visual weight. solid=primary CTA, outlined=secondary, ghost=tertiary." },
+        { "name": "color", "type": "\"primary\" | \"secondary\" | \"danger\"", "default": "\"primary\"", "description": "Semantic color role." },
+        { "name": "size", "type": "\"sm\" | \"md\" | \"lg\"", "default": "\"md\"", "description": "Height: sm=32px, md=40px, lg=44px." },
+        { "name": "loading", "type": "boolean", "default": "false", "description": "Shows spinner, disables interaction, sets aria-busy." },
+        { "name": "leftIcon", "type": "ReactNode", "default": "undefined", "description": "Icon rendered before label text." },
+        { "name": "rightIcon", "type": "ReactNode", "default": "undefined", "description": "Icon rendered after label text." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Native disabled — removes from tab order." }
+      ],
+      "doPatterns": [
+        "Use solid/primary for the single main CTA on a page or form",
+        "Use outlined/secondary for cancel or back actions next to a primary",
+        "Use ghost/secondary for tertiary or destructive-confirmation cancel actions",
+        "Use size=sm inside table rows or compact layouts"
+      ],
+      "dontPatterns": [
+        "Don't use danger color unless the action permanently destroys data",
+        "Don't place two solid/primary buttons side by side",
+        "Don't use ghost for primary actions — it reads as inactive"
+      ]
+    },
+    {
+      "name": "Input",
+      "description": "Text input field for single-line user data entry.",
+      "import": "@/components/ui/input",
+      "exports": ["Input", "InputProps"],
+      "props": [
+        { "name": "label", "type": "string", "default": "undefined", "description": "Label text rendered above the input." },
+        { "name": "hint", "type": "string", "default": "undefined", "description": "Helper text rendered below when no error is present." },
+        { "name": "error", "type": "string", "default": "undefined", "description": "Error message — renders below input, sets aria-invalid, styles red border." },
+        { "name": "leadingIcon", "type": "ReactNode", "default": "undefined", "description": "Icon rendered inside the input on the left." },
+        { "name": "trailingIcon", "type": "ReactNode", "default": "undefined", "description": "Icon rendered inside the input on the right." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables the input." },
+        { "name": "placeholder", "type": "string", "default": "undefined", "description": "Native placeholder text." }
+      ],
+      "doPatterns": [
+        "Always provide a label — placeholder alone is not accessible",
+        "Use error prop instead of rendering your own error message below",
+        "Use hint for constraints like character limits or format guidance"
+      ],
+      "dontPatterns": [
+        "Don't show both error and hint at the same time — error replaces hint",
+        "Don't use leadingIcon and trailingIcon together without testing at sm screens"
+      ]
+    },
+    {
+      "name": "Textarea",
+      "description": "Multi-line text input for longer user content.",
+      "import": "@/components/ui/textarea",
+      "exports": ["Textarea", "TextareaProps"],
+      "props": [
+        { "name": "label", "type": "string", "default": "undefined", "description": "Label rendered above." },
+        { "name": "hint", "type": "string", "default": "undefined", "description": "Helper text below." },
+        { "name": "error", "type": "string", "default": "undefined", "description": "Error message — sets aria-invalid." },
+        { "name": "rows", "type": "number", "default": "4", "description": "Initial visible row count." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables the textarea." }
+      ],
+      "doPatterns": [
+        "Use for descriptions, notes, or any content requiring more than one line",
+        "Set rows to reflect expected content length"
+      ],
+      "dontPatterns": [
+        "Don't use Textarea for single-line inputs — use Input instead"
+      ]
+    },
+    {
+      "name": "Select",
+      "description": "Native dropdown for choosing from a fixed list of options.",
+      "import": "@/components/ui/select",
+      "exports": ["Select", "SelectProps", "SelectOption"],
+      "props": [
+        { "name": "options", "type": "SelectOption[]", "default": "required", "description": "Array of { value, label, disabled? } objects." },
+        { "name": "label", "type": "string", "default": "undefined", "description": "Label rendered above." },
+        { "name": "placeholder", "type": "string", "default": "undefined", "description": "Disabled first option shown when no value is selected." },
+        { "name": "hint", "type": "string", "default": "undefined", "description": "Helper text below." },
+        { "name": "error", "type": "string", "default": "undefined", "description": "Error message — sets aria-invalid." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables the select." }
+      ],
+      "doPatterns": [
+        "Use when the list of options is fixed and known at build time",
+        "Provide a placeholder for optional fields"
+      ],
+      "dontPatterns": [
+        "Don't use for more than ~15 options — consider a searchable dropdown instead",
+        "Don't use for boolean yes/no — use a Checkbox or Switch"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "description": "Boolean toggle for opt-in/opt-out choices within forms.",
+      "import": "@/components/ui/checkbox",
+      "exports": ["Checkbox", "CheckboxProps"],
+      "props": [
+        { "name": "label", "type": "string", "default": "undefined", "description": "Clickable label text next to the checkbox." },
+        { "name": "description", "type": "string", "default": "undefined", "description": "Secondary descriptive text below the label." },
+        { "name": "checked", "type": "boolean", "default": "undefined", "description": "Controlled checked state." },
+        { "name": "defaultChecked", "type": "boolean", "default": "undefined", "description": "Uncontrolled initial checked state." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables interaction." },
+        { "name": "onChange", "type": "(checked: boolean) => void", "default": "undefined", "description": "Called with the new boolean value when changed." },
+        { "name": "name", "type": "string", "default": "undefined", "description": "Native name for form submission." }
+      ],
+      "doPatterns": [
+        "Use for opt-in agreements, feature toggles in a list, or multi-select filter groups",
+        "Use description for clarifying text below the label"
+      ],
+      "dontPatterns": [
+        "Don't use Checkbox for a single on/off setting — use Switch instead",
+        "Don't use Checkbox for mutually exclusive choices — use Select or radio buttons"
+      ]
+    },
+    {
+      "name": "Switch",
+      "description": "Toggle for a single boolean setting that takes immediate effect.",
+      "import": "@/components/ui/switch",
+      "exports": ["Switch", "SwitchProps"],
+      "props": [
+        { "name": "label", "type": "string", "default": "undefined", "description": "Clickable label text next to the switch." },
+        { "name": "description", "type": "string", "default": "undefined", "description": "Secondary text below the label." },
+        { "name": "checked", "type": "boolean", "default": "undefined", "description": "Controlled checked state." },
+        { "name": "defaultChecked", "type": "boolean", "default": "undefined", "description": "Uncontrolled initial state." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables interaction." },
+        { "name": "onChange", "type": "(checked: boolean) => void", "default": "undefined", "description": "Called with new boolean value on toggle." }
+      ],
+      "doPatterns": [
+        "Use for immediate-effect settings like 'Enable notifications' or 'Dark mode'",
+        "Use description to explain the consequence of toggling"
+      ],
+      "dontPatterns": [
+        "Don't use Switch inside a form that requires Submit — use Checkbox instead",
+        "Don't use Switch for multi-select — use Checkbox group"
+      ]
+    },
+    {
+      "name": "Badge",
+      "description": "Small inline label for status, category, or count.",
+      "import": "@/components/ui/badge",
+      "exports": ["Badge", "BadgeProps", "BadgeVariant", "BadgeSize"],
+      "props": [
+        { "name": "variant", "type": "\"default\" | \"success\" | \"warning\" | \"error\" | \"info\" | \"purple\"", "default": "\"default\"", "description": "Semantic color variant." },
+        { "name": "size", "type": "\"sm\" | \"md\"", "default": "\"md\"", "description": "sm=10px text, md=12px text." },
+        { "name": "dot", "type": "boolean", "default": "false", "description": "Shows a colored dot before the label." },
+        { "name": "status", "type": "boolean", "default": "false", "description": "Adds role='status' for live-region screen reader announcements." }
+      ],
+      "doPatterns": [
+        "Use variant to convey semantic meaning — success=active/complete, error=failed/blocked",
+        "Use dot variant for compact status indicators next to names"
+      ],
+      "dontPatterns": [
+        "Don't use Badge for counts that update dynamically without setting status={true}",
+        "Don't use more than 2 badges on the same row"
+      ]
+    },
+    {
+      "name": "Avatar",
+      "description": "Circular user representation — image, initials, or fallback icon.",
+      "import": "@/components/ui/avatar",
+      "exports": ["Avatar", "AvatarProps", "AvatarSize"],
+      "props": [
+        { "name": "src", "type": "string", "default": "undefined", "description": "Image URL. Falls back to initials or icon on error." },
+        { "name": "initials", "type": "string", "default": "undefined", "description": "1-2 letter initials shown when no image is available." },
+        { "name": "alt", "type": "string", "default": "\"\"", "description": "REQUIRED for accessibility — used as aria-label when no image is shown." },
+        { "name": "size", "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"", "default": "\"md\"", "description": "sm=24px, md=32px, lg=40px, xl=56px." }
+      ],
+      "doPatterns": [
+        "Always provide alt with the person's name",
+        "Provide initials as fallback when image may not load"
+      ],
+      "dontPatterns": [
+        "Don't use Avatar for non-person imagery — use an icon or image instead",
+        "Don't omit alt — it breaks screen reader support for initials/fallback states"
+      ]
+    },
+    {
+      "name": "Card",
+      "description": "Surface container for grouping related content. Compose with CardHeader, CardTitle, CardDescription, CardFooter.",
+      "import": "@/components/ui/card",
+      "exports": ["Card", "CardHeader", "CardTitle", "CardDescription", "CardFooter", "CardProps", "CardPadding", "CardElevation"],
+      "props": [
+        { "name": "padding", "type": "\"none\" | \"sm\" | \"md\" | \"lg\"", "default": "\"md\"", "description": "Inner padding. none=0, sm=12px, md=20px, lg=32px." },
+        { "name": "border", "type": "boolean", "default": "true", "description": "Shows a subtle border around the card." },
+        { "name": "elevation", "type": "0 | 1 | 2 | 4 | 8", "default": "0", "description": "Drop shadow depth. 0=flat, 8=highest." }
+      ],
+      "composedWith": ["CardHeader", "CardTitle", "CardDescription", "CardFooter"],
+      "doPatterns": [
+        "Use Card to wrap forms, settings sections, or content panels",
+        "Use CardHeader + CardTitle + CardDescription for consistent heading structure",
+        "Use CardFooter for action buttons at the bottom"
+      ],
+      "dontPatterns": [
+        "Don't nest Cards more than 1 level deep",
+        "Don't use elevation > 2 for inline content — reserve high elevation for modals/popovers"
+      ]
+    }
+  ]
+}
