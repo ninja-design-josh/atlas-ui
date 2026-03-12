@@ -1,107 +1,83 @@
 "use client";
 
+import * as React from "react";
 import { Select } from "@/components/ui/select";
-import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
-import { LivePreview } from "@/components/docs/live-preview";
-import { CodeBlock } from "@/components/docs/code-block";
-import { PropsTable, type PropDef } from "@/components/docs/props-table";
+import { ComponentSection } from "@/components/docs/component-section";
+import type { PropDef } from "@/components/docs/props-table";
 
-const ROLE_OPTIONS = [
+const OPTIONS = [
   { value: "admin",  label: "Admin" },
   { value: "editor", label: "Editor" },
   { value: "viewer", label: "Viewer" },
 ];
 
-const IMPORT = `import { Select } from "@/components/ui/select";`;
-
-const USAGE = `const ROLE_OPTIONS = [
-  { value: "admin", label: "Admin" },
-  { value: "editor", label: "Editor" },
-  { value: "viewer", label: "Viewer" },
-];
-
-// Basic
-<Select
-  options={ROLE_OPTIONS}
-  placeholder="Select a role..."
-/>
-
-// With label
-<Select
-  label="User Role"
-  options={ROLE_OPTIONS}
-  defaultValue="viewer"
-/>
-
-// Error state
-<Select
-  label="Country"
-  options={COUNTRY_OPTIONS}
-  error="Please select a country."
-/>`;
-
 const PROPS: PropDef[] = [
-  { name: "options",     type: "SelectOption[]", required: true, description: 'Array of { value: string; label: string; disabled?: boolean }.' },
-  { name: "label",       type: "string",         description: "Label text displayed above the select." },
-  { name: "hint",        type: "string",         description: "Helper text displayed below." },
-  { name: "error",       type: "string",         description: "Error message; changes border to red." },
-  { name: "placeholder", type: "string",         description: "Disabled first option used as a prompt." },
-  { name: "disabled",    type: "boolean",        default: "false", description: "Disables the select." },
+  { name: "options",      type: "{ value: string; label: string }[]", required: true, description: "List of options to display." },
+  { name: "label",        type: "string",  description: "Label text above the select." },
+  { name: "placeholder",  type: "string",  description: "Placeholder option shown when no value is selected." },
+  { name: "hint",         type: "string",  description: "Helper text below the select." },
+  { name: "error",        type: "string",  description: "Error message. Replaces hint and sets error styles." },
+  { name: "disabled",     type: "boolean", default: "false", description: "Disables the select." },
+  { name: "className",    type: "string",  description: "Additional CSS classes on the wrapper." },
 ];
 
 export default function SelectPage() {
   return (
     <ComponentSection
-      id="select"
       name="Select"
       status="stable"
-      description="A native dropdown for choosing from a fixed list of options. Uses the browser's native select element for accessibility and mobile support."
-      whenToUse={[
-        "Use when the user must choose exactly one value from 4+ options.",
-        "Prefer Checkbox or Switch for binary on/off choices.",
-        "Provide a placeholder option to prompt selection in required fields.",
+      description="A native dropdown for choosing from a fixed list of options. Use when the list has fewer than ~15 items and doesn't require search."
+      breadcrumb={[
+        { label: "Home",               href: "/" },
+        { label: "Components",         href: "/components" },
+        { label: "Selection and input", href: "/components" },
       ]}
-      controlDefs={[
-        { prop: "label",    type: "string",  default: "Role" },
-        { prop: "error",    type: "string",  default: "" },
-        { prop: "disabled", type: "boolean", default: false },
+      examples={[
+        {
+          label: "Default",
+          preview: <div className="w-56"><Select options={OPTIONS} /></div>,
+          code: `<Select options={OPTIONS} />`,
+        },
+        {
+          label: "With placeholder",
+          preview: <div className="w-56"><Select options={OPTIONS} label="Role" placeholder="Choose a role..." /></div>,
+          code: `<Select options={OPTIONS} label="Role" placeholder="Choose a role..." />`,
+        },
+        {
+          label: "With hint",
+          preview: <div className="w-56"><Select options={OPTIONS} label="Role" hint="Users inherit permissions from their role." placeholder="Choose a role..." /></div>,
+          code: `<Select options={OPTIONS} label="Role" hint="Users inherit permissions from their role." />`,
+        },
+        {
+          label: "Error state",
+          preview: <div className="w-56"><Select options={OPTIONS} label="Role" error="Please select a role." /></div>,
+          code: `<Select options={OPTIONS} label="Role" error="Please select a role." />`,
+        },
+        {
+          label: "Disabled",
+          preview: <div className="w-56"><Select options={OPTIONS} label="Role" disabled /></div>,
+          code: `<Select options={OPTIONS} label="Role" disabled />`,
+        },
       ]}
-      renderPreview={(p) => (
-        <div className="w-64">
-          <Select
-            label={(p.label as string) || undefined}
-            options={ROLE_OPTIONS}
-            placeholder="Select a role..."
-            error={(p.error as string) || undefined}
-            disabled={p.disabled as boolean}
-          />
-        </div>
-      )}
-    >
-      <div>
-        <DocSubheading>States</DocSubheading>
-        <LivePreview centered={false}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full p-2">
-            <Select options={ROLE_OPTIONS} placeholder="Select a role..." />
-            <Select label="User Role" options={ROLE_OPTIONS} defaultValue="viewer" />
-            <Select label="Department" options={ROLE_OPTIONS} error="Please select a department." />
-            <Select label="Access Level (disabled)" options={ROLE_OPTIONS} defaultValue="viewer" disabled />
-          </div>
-        </LivePreview>
-      </div>
-
-      <div>
-        <DocSubheading>Import</DocSubheading>
-        <CodeBlock code={IMPORT} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Usage</DocSubheading>
-        <CodeBlock code={USAGE} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Props</DocSubheading>
-        <PropsTable props={PROPS} />
-      </div>
-    </ComponentSection>
+      props={PROPS}
+      dos={[
+        { label: "Use Select for fixed lists under ~15 options." },
+      ]}
+      donts={[
+        { label: "Don't use Select for large or searchable lists — use a Combobox instead." },
+      ]}
+      accessibility={{
+        labeling: "The label prop renders an associated <label>. The native <select> is keyboard accessible by default.",
+        keyboardSupport: [
+          "Tab / Shift+Tab — move focus to the select",
+          "Space or Enter — open the dropdown",
+          "Arrow keys — navigate options",
+        ],
+      }}
+      relatedComponents={[
+        { label: "Input",    href: "/components/selection-and-input/input" },
+        { label: "Checkbox", href: "/components/selection-and-input/checkbox" },
+      ]}
+    />
   );
 }
