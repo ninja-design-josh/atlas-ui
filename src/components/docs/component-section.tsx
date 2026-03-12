@@ -140,7 +140,7 @@ export function ComponentSection({
                   "px-3 py-1.5 rounded border text-sm transition-colors",
                   i === activeExample
                     ? "border-border-strong bg-surface-raised text-text-primary font-medium shadow-elevation-1"
-                    : "border-border text-grey-60 hover:text-text-primary hover:border-border-strong bg-surface"
+                    : "border-border text-text-secondary hover:text-text-primary hover:border-border-strong bg-surface"
                 )}
               >
                 {ex.label}
@@ -195,9 +195,9 @@ export function ComponentSection({
             Best practices
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {dos.map((item, i) => (
+            {dos.map((item) => (
               <div
-                key={i}
+                key={item.label}
                 className="rounded-lg border border-border overflow-hidden"
               >
                 <div className="flex items-center gap-2 px-4 py-2.5 bg-green-5 border-b border-border">
@@ -216,9 +216,9 @@ export function ComponentSection({
                 </p>
               </div>
             ))}
-            {donts.map((item, i) => (
+            {donts.map((item) => (
               <div
-                key={i}
+                key={item.label}
                 className="rounded-lg border border-border overflow-hidden"
               >
                 <div className="flex items-center gap-2 px-4 py-2.5 bg-red-5 border-b border-border">
@@ -288,9 +288,9 @@ export function ComponentSection({
                 Keyboard support
               </h3>
               <ul className="space-y-1.5">
-                {accessibility.keyboardSupport.map((item, i) => (
+                {accessibility.keyboardSupport.map((item) => (
                   <li
-                    key={i}
+                    key={item}
                     className="flex items-start gap-2 text-text-secondary text-sm"
                   >
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-grey-30 flex-shrink-0" />
