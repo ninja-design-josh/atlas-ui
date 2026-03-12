@@ -35,6 +35,7 @@ Defined in `src/app/globals.css` under `@theme {}`. Always use semantic tokens:
 - Text: `text-text-primary`, `text-text-secondary`, `text-text-error`, `text-text-link`
 - Surface: `bg-surface`, `bg-surface-subtle`, `bg-surface-raised`
 - Border: `border-border`, `border-border-strong`
+- Icon: `text-icon-primary`, `text-icon-secondary`, `text-icon-red`, `text-icon-green`, `text-icon-blue`, `text-icon-yellow`
 - Dark mode: class-based (`class="dark"` on `<html>`) — all semantic tokens update automatically
 
 ## Prop Conventions
