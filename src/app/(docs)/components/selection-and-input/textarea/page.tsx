@@ -1,96 +1,75 @@
 "use client";
 
+import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
-import { LivePreview } from "@/components/docs/live-preview";
-import { CodeBlock } from "@/components/docs/code-block";
-import { PropsTable, type PropDef } from "@/components/docs/props-table";
-
-const IMPORT = `import { Textarea } from "@/components/ui/textarea";`;
-
-const USAGE = `// Basic
-<Textarea placeholder="Write something..." />
-
-// With label and hint
-<Textarea
-  label="Description"
-  hint="Max 500 characters."
-  placeholder="Describe your project..."
-  rows={5}
-/>
-
-// Error state
-<Textarea
-  label="Bio"
-  error="Bio cannot be empty."
-/>`;
+import { ComponentSection } from "@/components/docs/component-section";
+import type { PropDef } from "@/components/docs/props-table";
 
 const PROPS: PropDef[] = [
-  { name: "label",    type: "string",  description: "Label text displayed above the textarea." },
-  { name: "hint",     type: "string",  description: "Helper text displayed below." },
-  { name: "error",    type: "string",  description: "Error message; overrides hint and changes border to red." },
-  { name: "rows",     type: "number",  default: "4", description: "Initial visible row count." },
-  { name: "disabled", type: "boolean", default: "false", description: "Disables the textarea." },
-  { name: "...TextareaHTMLAttributes", type: "React.TextareaHTMLAttributes", description: "All standard HTML textarea attributes are supported." },
+  { name: "label",     type: "string",  description: "Label text displayed above the textarea." },
+  { name: "hint",      type: "string",  description: "Helper text below the textarea." },
+  { name: "error",     type: "string",  description: "Error message. Replaces hint and sets error styles." },
+  { name: "rows",      type: "number",  default: "3",     description: "Number of visible text rows." },
+  { name: "disabled",  type: "boolean", default: "false", description: "Disables the textarea." },
+  { name: "className", type: "string",  description: "Additional CSS classes on the wrapper." },
 ];
 
 export default function TextareaPage() {
   return (
     <ComponentSection
-      id="textarea"
       name="Textarea"
       status="stable"
-      description="A multi-line text field for longer content like descriptions, comments, or notes. Shares the same label/hint/error API as Input."
-      whenToUse={[
-        "Use instead of Input when the expected content spans multiple sentences.",
-        "Provide a rows prop to hint at the expected content length.",
-        "Use the same label + error pattern as Input for consistent form UX.",
+      description="A multi-line text input. Shares the same label/hint/error API as Input."
+      breadcrumb={[
+        { label: "Home",               href: "/" },
+        { label: "Components",         href: "/components" },
+        { label: "Selection and input", href: "/components" },
       ]}
-      controlDefs={[
-        { prop: "label",       type: "string",  default: "Description" },
-        { prop: "placeholder", type: "string",  default: "Write something..." },
-        { prop: "hint",        type: "string",  default: "" },
-        { prop: "error",       type: "string",  default: "" },
-        { prop: "rows",        type: "string",  default: "4" },
-        { prop: "disabled",    type: "boolean", default: false },
+      examples={[
+        {
+          label: "Default",
+          preview: <div className="w-64"><Textarea placeholder="Enter text..." /></div>,
+          code: `<Textarea placeholder="Enter text..." />`,
+        },
+        {
+          label: "With label",
+          preview: <div className="w-64"><Textarea label="Description" hint="Max 500 characters." placeholder="Describe your product..." /></div>,
+          code: `<Textarea label="Description" hint="Max 500 characters." />`,
+        },
+        {
+          label: "Error state",
+          preview: <div className="w-64"><Textarea label="Bio" error="Bio is required." /></div>,
+          code: `<Textarea label="Bio" error="Bio is required." />`,
+        },
+        {
+          label: "Custom rows",
+          preview: <div className="w-64"><Textarea label="Notes" rows={6} placeholder="Add notes..." /></div>,
+          code: `<Textarea rows={6} placeholder="Add notes..." />`,
+        },
+        {
+          label: "Disabled",
+          preview: <div className="w-64"><Textarea label="Archived" disabled defaultValue="This field is locked." /></div>,
+          code: `<Textarea disabled defaultValue="This field is locked." />`,
+        },
       ]}
-      renderPreview={(p) => (
-        <div className="w-64">
-          <Textarea
-            label={(p.label as string) || undefined}
-            placeholder={p.placeholder as string}
-            hint={(p.hint as string) || undefined}
-            error={(p.error as string) || undefined}
-            rows={Number(p.rows)}
-            disabled={p.disabled as boolean}
-          />
-        </div>
-      )}
-    >
-      <div>
-        <DocSubheading>States</DocSubheading>
-        <LivePreview centered={false}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full p-2">
-            <Textarea placeholder="Write something..." rows={3} />
-            <Textarea label="Description" hint="Max 500 characters." placeholder="Describe your project..." rows={3} />
-            <Textarea label="Bio" error="Bio cannot be empty." rows={3} />
-            <Textarea label="Notes (disabled)" value="Read-only content." disabled rows={3} />
-          </div>
-        </LivePreview>
-      </div>
-
-      <div>
-        <DocSubheading>Import</DocSubheading>
-        <CodeBlock code={IMPORT} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Usage</DocSubheading>
-        <CodeBlock code={USAGE} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Props</DocSubheading>
-        <PropsTable props={PROPS} />
-      </div>
-    </ComponentSection>
+      props={PROPS}
+      dos={[
+        { label: "Use Textarea for open-ended multi-line input like descriptions or notes." },
+      ]}
+      donts={[
+        { label: "Don't use Textarea in place of Input for short single-line fields." },
+      ]}
+      accessibility={{
+        labeling: "The label prop renders an associated <label>. Always provide a label or aria-label.",
+        keyboardSupport: [
+          "Tab / Shift+Tab — move focus into and out of the field",
+          "Enter — inserts a newline (native browser behavior)",
+        ],
+      }}
+      relatedComponents={[
+        { label: "Input",  href: "/components/selection-and-input/input" },
+        { label: "Select", href: "/components/selection-and-input/select" },
+      ]}
+    />
   );
 }
