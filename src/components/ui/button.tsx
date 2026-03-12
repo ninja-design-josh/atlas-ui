@@ -72,6 +72,7 @@ export function Button({
       disabled={disabled || loading}
       aria-busy={loading}
       {...props}
+      aria-disabled={disabled || loading}
     >
       {loading ? (
         <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
