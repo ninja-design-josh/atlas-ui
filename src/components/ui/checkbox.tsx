@@ -28,7 +28,6 @@ export function Checkbox({
     <div className={cn("flex items-start gap-2.5", className)}>
       <div className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center mt-0.5">
         <input
-          type="checkbox"
           id={checkboxId}
           checked={checked}
           defaultChecked={defaultChecked}
@@ -43,6 +42,7 @@ export function Checkbox({
             cursor-pointer"
           aria-describedby={description ? `${checkboxId}-desc` : undefined}
           {...props}
+          type="checkbox"
         />
         <Check
           className="pointer-events-none absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 stroke-[3]"
