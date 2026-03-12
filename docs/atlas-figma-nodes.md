@@ -1,3 +1,13 @@
+## Atlas UI Figma File (Standalone Visual Reference)
+
+Figma file: `iB6n4nWmITMqkasBinHBlW`
+URL: https://www.figma.com/design/iB6n4nWmITMqkasBinHBlW
+Created: 2026-03-12
+Purpose: Visual documentation for the Atlas UI component showcase.
+         Code Connect node IDs remain in the Bento section below.
+
+---
+
 # Atlas UI — Figma Component Node IDs
 
 Figma file: `AjwZJsf64tNSbbSSLF234H` (Bento Component Library)
