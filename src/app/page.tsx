@@ -22,12 +22,9 @@ import { CodeBlock } from "@/components/docs/code-block";
 import { PropsTable, type PropDef } from "@/components/docs/props-table";
 import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
 import { LivePreview } from "@/components/docs/live-preview";
+import { DocsLayout, type NavItem } from "@/components/docs/docs-layout";
 
 // ─── Sidebar navigation ──────────────────────────────────────────────────────
-
-type NavItem =
-  | { type: "section"; label: string }
-  | { type: "link"; id: string; label: string };
 
 const NAV_ITEMS: NavItem[] = [
   { type: "link", id: "overview", label: "Overview" },
@@ -411,10 +408,26 @@ const ROLE_OPTIONS = [
 export default function Page() {
   const [darkMode, setDarkMode] = React.useState(false);
 
+  // Load dark mode preference from localStorage on mount
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem("atlas-dark-mode");
+      if (stored === "true") {
+        setDarkMode(true);
+      }
+    } catch {
+      // localStorage unavailable (SSR or private browsing)
+    }
+  }, []);
+
   function toggleDark() {
     const next = !darkMode;
     setDarkMode(next);
-    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("atlas-dark-mode", String(next));
+    } catch {
+      // ignore
+    }
   }
 
   const [inputValue, setInputValue] = React.useState("");
@@ -425,55 +438,12 @@ export default function Page() {
   const [switchB, setSwitchB] = React.useState(true);
 
   return (
-    <div className="min-h-screen flex flex-col">
-
-      {/* Header */}
-      <header className="sticky top-0 z-50 h-14 bg-white dark:bg-grey-110 border-b border-grey-10 dark:border-grey-90 flex-shrink-0">
-        <div className="flex items-center justify-between px-6 h-full">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-grey-100 dark:text-grey-10 text-lg">Atlas UI</span>
-            <span className="text-grey-30 dark:text-grey-70 select-none">·</span>
-            <span className="text-sm text-grey-50">Bento / MUI</span>
-          </div>
-          <button
-            onClick={toggleDark}
-            className="text-sm px-3 py-1.5 rounded-sm border border-grey-20 dark:border-grey-70 text-grey-70 dark:text-grey-40 hover:bg-grey-5 dark:hover:bg-grey-90 transition-colors"
-          >
-            {darkMode ? "Light mode" : "Dark mode"}
-          </button>
-        </div>
-      </header>
-
-      {/* Body */}
-      <div className="flex flex-1 min-h-0">
-
-        {/* Sidebar */}
-        <nav className="w-[260px] flex-shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto border-r border-grey-10 dark:border-grey-90 bg-white dark:bg-grey-110 py-6 px-4">
-          <ul className="space-y-0.5">
-            {NAV_ITEMS.map((item, i) => {
-              if (item.type === "section") {
-                return (
-                  <li key={i} className="pt-5 pb-1">
-                    <span className="text-overline text-grey-40 dark:text-grey-60">{item.label}</span>
-                  </li>
-                );
-              }
-              return (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className="block px-3 py-2 rounded-sm text-sm text-grey-70 dark:text-grey-40 hover:bg-grey-5 dark:hover:bg-grey-90 hover:text-grey-100 dark:hover:text-grey-10 transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        {/* Main */}
-        <main className="flex-1 min-w-0 px-10 py-8 max-w-4xl">
+    <DocsLayout
+      navItems={NAV_ITEMS}
+      darkMode={darkMode}
+      onDarkModeToggle={toggleDark}
+      onSearchOpen={() => {}}
+    >
 
           {/* Overview */}
           <section id="overview" className="scroll-mt-16 pb-10 border-b border-grey-10 dark:border-grey-90">
@@ -965,8 +935,6 @@ export default function Page() {
             </div>
           </ComponentSection>
 
-        </main>
-      </div>
-    </div>
+    </DocsLayout>
   );
 }
