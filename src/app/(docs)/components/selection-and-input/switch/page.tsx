@@ -2,90 +2,69 @@
 
 import * as React from "react";
 import { Switch } from "@/components/ui/switch";
-import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
-import { LivePreview } from "@/components/docs/live-preview";
-import { CodeBlock } from "@/components/docs/code-block";
-import { PropsTable, type PropDef } from "@/components/docs/props-table";
-
-const IMPORT = `import { Switch } from "@/components/ui/switch";`;
-
-const USAGE = `// Controlled
-const [enabled, setEnabled] = React.useState(false);
-<Switch
-  label="Dark mode"
-  checked={enabled}
-  onChange={setEnabled}
-/>
-
-// With label and description
-<Switch
-  label="Two-factor authentication"
-  description="Add an extra layer of security to your account."
-  defaultChecked={false}
-/>`;
+import { ComponentSection } from "@/components/docs/component-section";
+import type { PropDef } from "@/components/docs/props-table";
 
 const PROPS: PropDef[] = [
-  { name: "label",        type: "string",  description: "Label text shown next to the toggle." },
-  { name: "description",  type: "string",  description: "Secondary helper text below the label." },
-  { name: "checked",      type: "boolean", description: "Controlled checked state." },
-  { name: "defaultChecked", type: "boolean", default: "false", description: "Initial checked state (uncontrolled)." },
-  { name: "disabled",     type: "boolean", default: "false", description: "Disables the toggle." },
-  { name: "onChange",     type: "(checked: boolean) => void", description: "Called when the toggle state changes." },
+  { name: "label",          type: "string",                     description: "Label text next to the switch." },
+  { name: "description",    type: "string",                     description: "Secondary text below the label." },
+  { name: "checked",        type: "boolean",                    description: "Controlled on/off state." },
+  { name: "defaultChecked", type: "boolean", default: "false",  description: "Uncontrolled initial on/off state." },
+  { name: "onChange",       type: "(checked: boolean) => void", description: "Callback when state changes." },
+  { name: "disabled",       type: "boolean", default: "false",  description: "Disables the switch." },
 ];
 
 export default function SwitchPage() {
-  const [switchA, setSwitchA] = React.useState(false);
-  const [switchB, setSwitchB] = React.useState(true);
-
   return (
     <ComponentSection
-      id="switch"
       name="Switch"
       status="stable"
-      description="A toggle control for binary settings that take effect immediately without requiring a form submit."
-      whenToUse={[
-        "Use for settings that apply instantly (dark mode, notifications, feature toggles).",
-        "Use Checkbox instead when the change requires a form submit to take effect.",
-        "Add a description to clarify the impact of toggling.",
+      description="An immediate-effect boolean toggle. Use when the action takes effect instantly — not inside a form that requires a submit button."
+      breadcrumb={[
+        { label: "Home",               href: "/" },
+        { label: "Components",         href: "/components" },
+        { label: "Selection and input", href: "/components" },
       ]}
-      controlDefs={[
-        { prop: "label",       type: "string",  default: "Email notifications" },
-        { prop: "description", type: "string",  default: "Receive updates by email." },
-        { prop: "disabled",    type: "boolean", default: false },
+      examples={[
+        {
+          label: "Default",
+          preview: <Switch label="Dark mode" />,
+          code: `<Switch label="Dark mode" />`,
+        },
+        {
+          label: "With description",
+          preview: <Switch label="Email notifications" description="Receive alerts when someone mentions you." />,
+          code: `<Switch label="Email notifications" description="Receive alerts when someone mentions you." />`,
+        },
+        {
+          label: "On state",
+          preview: <Switch label="Auto-save" defaultChecked />,
+          code: `<Switch label="Auto-save" defaultChecked />`,
+        },
+        {
+          label: "Disabled",
+          preview: <div className="space-y-2"><Switch label="Managed by admin" disabled /><Switch label="Enforced setting" disabled defaultChecked /></div>,
+          code: `<Switch label="Managed by admin" disabled />`,
+        },
       ]}
-      renderPreview={(p) => (
-        <Switch
-          label={p.label as string}
-          description={(p.description as string) || undefined}
-          disabled={p.disabled as boolean}
-        />
-      )}
-    >
-      <div>
-        <DocSubheading>States</DocSubheading>
-        <LivePreview centered={false}>
-          <div className="space-y-4 p-2">
-            <Switch label="Off" checked={switchA} onChange={setSwitchA} />
-            <Switch label="On" checked={switchB} onChange={setSwitchB} />
-            <Switch label="Two-factor authentication" description="Add an extra layer of security to your account." defaultChecked={false} />
-            <Switch label="Disabled off" disabled />
-            <Switch label="Disabled on" checked disabled />
-          </div>
-        </LivePreview>
-      </div>
-
-      <div>
-        <DocSubheading>Import</DocSubheading>
-        <CodeBlock code={IMPORT} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Usage</DocSubheading>
-        <CodeBlock code={USAGE} language="tsx" />
-      </div>
-      <div>
-        <DocSubheading>Props</DocSubheading>
-        <PropsTable props={PROPS} />
-      </div>
-    </ComponentSection>
+      props={PROPS}
+      dos={[
+        { label: "Use Switch for settings that take effect immediately without a save action." },
+      ]}
+      donts={[
+        { label: "Don't use Switch inside a submit-form — use Checkbox instead." },
+      ]}
+      accessibility={{
+        description: "Switch renders with role='switch' and aria-checked. Screen readers announce the on/off state.",
+        labeling: "Always provide a label. The switch is announced as '[label], switch, on/off'.",
+        keyboardSupport: [
+          "Tab / Shift+Tab — move focus to the switch",
+          "Space — toggle on/off state",
+        ],
+      }}
+      relatedComponents={[
+        { label: "Checkbox", href: "/components/selection-and-input/checkbox" },
+      ]}
+    />
   );
 }
