@@ -4,13 +4,16 @@ import * as React from "react";
 import { Mail, Search, Eye, EyeOff, ChevronRight, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import type { ButtonVariant, ButtonColor, ButtonSize } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
+import type { BadgeVariant, BadgeSize } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
+import type { AvatarSize } from "@/components/ui/avatar";
 import {
   Card,
   CardHeader,
@@ -18,6 +21,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
+import type { CardPadding, CardElevation } from "@/components/ui/card";
 import { CodeBlock } from "@/components/docs/code-block";
 import { PropsTable, type PropDef } from "@/components/docs/props-table";
 import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
@@ -410,6 +414,14 @@ const SEARCH_ITEMS = [
   { id: "card",     label: "Card",     description: "Surface container — compose with CardHeader etc.", type: "component" as const },
 ];
 
+// ─── Playground options ───────────────────────────────────────────────────────
+
+const PLAYGROUND_OPTIONS = [
+  { value: "admin",  label: "Admin" },
+  { value: "editor", label: "Editor" },
+  { value: "viewer", label: "Viewer" },
+];
+
 // ─── Demo data ────────────────────────────────────────────────────────────────
 
 const ROLE_OPTIONS = [
@@ -497,11 +509,40 @@ export default function Page() {
           <ComponentSection
             id="button"
             name="Button"
+            status="stable"
             description="A clickable element that triggers an action or navigation. Supports three visual styles and three semantic color schemes."
             whenToUse={[
-              "Use solid + primary for the main call-to-action on a page or form.",
-              "Use outlined or ghost for secondary and tertiary actions that accompany a primary button.",
-              "Use color=danger to confirm destructive operations like deleting or revoking access.",
+              "Use for any clickable action that changes state or navigates",
+              "Use solid/primary for the single main CTA on a page or form",
+              "Use outlined/secondary alongside a primary action (e.g. Cancel next to Save)",
+              "Use ghost for low-emphasis or tertiary actions",
+            ]}
+            controlDefs={[
+              { prop: "variant",  type: "enum",    options: ["solid","outlined","ghost"],     default: "solid" },
+              { prop: "color",    type: "enum",    options: ["primary","secondary","danger"],  default: "primary" },
+              { prop: "size",     type: "enum",    options: ["sm","md","lg"],                  default: "md" },
+              { prop: "loading",  type: "boolean",                                             default: false },
+              { prop: "disabled", type: "boolean",                                             default: false },
+              { prop: "children", type: "string",                                              default: "Click me" },
+            ]}
+            renderPreview={(p) => (
+              <Button
+                variant={p.variant as ButtonVariant}
+                color={p.color as ButtonColor}
+                size={p.size as ButtonSize}
+                loading={p.loading as boolean}
+                disabled={p.disabled as boolean}
+              >
+                {p.children as string}
+              </Button>
+            )}
+            dos={[
+              { label: "Use solid/primary for the main CTA", preview: <Button variant="solid" color="primary">Save Changes</Button> },
+              { label: "Use outlined/secondary for cancel", preview: <Button variant="outlined" color="secondary">Cancel</Button> },
+            ]}
+            donts={[
+              { label: "Don't use two solid/primary buttons side by side", preview: <div className="flex gap-2"><Button variant="solid" color="primary">Save</Button><Button variant="solid" color="primary">Delete</Button></div> },
+              { label: "Don't use danger for non-destructive actions", preview: <Button variant="solid" color="danger">Save Profile</Button> },
             ]}
           >
             <div>
@@ -567,12 +608,31 @@ export default function Page() {
           <ComponentSection
             id="input"
             name="Input"
+            status="stable"
             description="A single-line text field for collecting user input. Supports labels, icons, hints, and error states."
             whenToUse={[
               "Use for short text values: names, emails, URLs, search queries.",
               "Pair with a label for form fields and a hint for format guidance.",
               "Switch the error prop to show inline validation feedback without changing the DOM structure.",
             ]}
+            controlDefs={[
+              { prop: "label",       type: "string",  default: "Email address" },
+              { prop: "placeholder", type: "string",  default: "you@example.com" },
+              { prop: "hint",        type: "string",  default: "We'll never share this." },
+              { prop: "error",       type: "string",  default: "" },
+              { prop: "disabled",    type: "boolean", default: false },
+            ]}
+            renderPreview={(p) => (
+              <div className="w-64">
+                <Input
+                  label={p.label as string || undefined}
+                  placeholder={p.placeholder as string}
+                  hint={(p.hint as string) || undefined}
+                  error={(p.error as string) || undefined}
+                  disabled={p.disabled as boolean}
+                />
+              </div>
+            )}
           >
             <div>
               <DocSubheading>States</DocSubheading>
@@ -625,12 +685,33 @@ export default function Page() {
           <ComponentSection
             id="textarea"
             name="Textarea"
+            status="stable"
             description="A multi-line text field for longer content like descriptions, comments, or notes. Shares the same label/hint/error API as Input."
             whenToUse={[
               "Use instead of Input when the expected content spans multiple sentences.",
               "Provide a rows prop to hint at the expected content length.",
               "Use the same label + error pattern as Input for consistent form UX.",
             ]}
+            controlDefs={[
+              { prop: "label",       type: "string",  default: "Description" },
+              { prop: "placeholder", type: "string",  default: "Write something..." },
+              { prop: "hint",        type: "string",  default: "" },
+              { prop: "error",       type: "string",  default: "" },
+              { prop: "rows",        type: "string",  default: "4" },
+              { prop: "disabled",    type: "boolean", default: false },
+            ]}
+            renderPreview={(p) => (
+              <div className="w-64">
+                <Textarea
+                  label={p.label as string || undefined}
+                  placeholder={p.placeholder as string}
+                  hint={(p.hint as string) || undefined}
+                  error={(p.error as string) || undefined}
+                  rows={Number(p.rows)}
+                  disabled={p.disabled as boolean}
+                />
+              </div>
+            )}
           >
             <div>
               <DocSubheading>States</DocSubheading>
@@ -662,12 +743,29 @@ export default function Page() {
           <ComponentSection
             id="select"
             name="Select"
+            status="stable"
             description="A native dropdown for choosing from a fixed list of options. Uses the browser's native select element for accessibility and mobile support."
             whenToUse={[
               "Use when the user must choose exactly one value from 4+ options.",
               "Prefer Checkbox or Switch for binary on/off choices.",
               "Provide a placeholder option to prompt selection in required fields.",
             ]}
+            controlDefs={[
+              { prop: "label",    type: "string",  default: "Role" },
+              { prop: "error",    type: "string",  default: "" },
+              { prop: "disabled", type: "boolean", default: false },
+            ]}
+            renderPreview={(p) => (
+              <div className="w-64">
+                <Select
+                  label={p.label as string || undefined}
+                  options={PLAYGROUND_OPTIONS}
+                  placeholder="Select a role..."
+                  error={(p.error as string) || undefined}
+                  disabled={p.disabled as boolean}
+                />
+              </div>
+            )}
           >
             <div>
               <DocSubheading>States</DocSubheading>
@@ -699,12 +797,25 @@ export default function Page() {
           <ComponentSection
             id="checkbox"
             name="Checkbox"
+            status="stable"
             description="A binary selection control for toggling individual options or selecting multiple items from a list."
             whenToUse={[
               "Use for independent yes/no choices in forms (accept terms, enable feature).",
               "Use a group of Checkboxes when users can select multiple items from a list.",
               "Use Switch instead for settings that take immediate effect without a form submit.",
             ]}
+            controlDefs={[
+              { prop: "label",       type: "string",  default: "Accept terms of service" },
+              { prop: "description", type: "string",  default: "Required to continue." },
+              { prop: "disabled",    type: "boolean", default: false },
+            ]}
+            renderPreview={(p) => (
+              <Checkbox
+                label={p.label as string}
+                description={(p.description as string) || undefined}
+                disabled={p.disabled as boolean}
+              />
+            )}
           >
             <div>
               <DocSubheading>States</DocSubheading>
@@ -741,12 +852,25 @@ export default function Page() {
           <ComponentSection
             id="switch"
             name="Switch"
+            status="stable"
             description="A toggle control for binary settings that take effect immediately without requiring a form submit."
             whenToUse={[
               "Use for settings that apply instantly (dark mode, notifications, feature toggles).",
               "Use Checkbox instead when the change requires a form submit to take effect.",
               "Add a description to clarify the impact of toggling.",
             ]}
+            controlDefs={[
+              { prop: "label",       type: "string",  default: "Email notifications" },
+              { prop: "description", type: "string",  default: "Receive updates by email." },
+              { prop: "disabled",    type: "boolean", default: false },
+            ]}
+            renderPreview={(p) => (
+              <Switch
+                label={p.label as string}
+                description={(p.description as string) || undefined}
+                disabled={p.disabled as boolean}
+              />
+            )}
           >
             <div>
               <DocSubheading>States</DocSubheading>
@@ -783,12 +907,24 @@ export default function Page() {
           <ComponentSection
             id="badge"
             name="Badge"
+            status="stable"
             description="A small label for surfacing status, categories, or counts. Renders inline; use inside Card headers, list rows, or next to Avatars."
             whenToUse={[
               "Use to communicate the status of an item (active, failed, pending).",
               "Use the dot variant for a status indicator paired with a short label.",
               "Keep badge labels short — 1 to 3 words maximum.",
             ]}
+            controlDefs={[
+              { prop: "variant", type: "enum",    options: ["default","success","warning","error","info","purple"], default: "success" },
+              { prop: "size",    type: "enum",    options: ["sm","md"],                                              default: "md" },
+              { prop: "dot",     type: "boolean",                                                                    default: false },
+              { prop: "label",   type: "string",                                                                     default: "Active" },
+            ]}
+            renderPreview={(p) => (
+              <Badge variant={p.variant as BadgeVariant} size={p.size as BadgeSize} dot={p.dot as boolean}>
+                {p.label as string}
+              </Badge>
+            )}
           >
             <div>
               <DocSubheading>Variants</DocSubheading>
@@ -835,12 +971,21 @@ export default function Page() {
           <ComponentSection
             id="avatar"
             name="Avatar"
+            status="stable"
             description="A circular image or fallback representing a user, team, or entity. Falls back gracefully: image → initials → generic icon."
             whenToUse={[
               "Use in navigation headers, comment threads, and user list rows.",
               "Provide initials as a fallback for when a profile image is unavailable.",
               "Use size=xl for profile pages; size=sm for dense tables or sidebar items.",
             ]}
+            controlDefs={[
+              { prop: "initials", type: "string", default: "JB" },
+              { prop: "size",     type: "enum",   options: ["sm","md","lg","xl"], default: "md" },
+              { prop: "alt",      type: "string", default: "Josh Brinksman" },
+            ]}
+            renderPreview={(p) => (
+              <Avatar initials={p.initials as string} size={p.size as AvatarSize} alt={p.alt as string} />
+            )}
           >
             <div>
               <DocSubheading>Sizes</DocSubheading>
@@ -900,12 +1045,30 @@ export default function Page() {
           <ComponentSection
             id="card"
             name="Card"
+            status="stable"
             description="A surface container for grouping related content. Use the CardHeader, CardTitle, CardDescription, and CardFooter subcomponents for consistent layout."
             whenToUse={[
               "Use to visually group content that belongs together (settings sections, list items, entity details).",
               "Use elevation > 0 when the card must stand out from a grey or surface-subtle background.",
               "Combine with Badge and Avatar in CardHeader for entity cards (user profiles, projects, integrations).",
             ]}
+            controlDefs={[
+              { prop: "padding",   type: "enum",    options: ["none","sm","md","lg"],    default: "md" },
+              { prop: "border",    type: "boolean",                                       default: true },
+              { prop: "elevation", type: "enum",    options: ["0","1","2","4","8"],       default: "0" },
+            ]}
+            renderPreview={(p) => (
+              <Card padding={p.padding as CardPadding} border={p.border as boolean} elevation={Number(p.elevation) as CardElevation}>
+                <CardHeader>
+                  <CardTitle>Card Title</CardTitle>
+                  <CardDescription>Supporting description text.</CardDescription>
+                </CardHeader>
+                <CardFooter>
+                  <Button variant="outlined" color="secondary" size="sm">Cancel</Button>
+                  <Button variant="solid" color="primary" size="sm">Save</Button>
+                </CardFooter>
+              </Card>
+            )}
           >
             <div>
               <DocSubheading>Elevation levels</DocSubheading>
