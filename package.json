@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "figma:export-tokens": "ts-node --project tsconfig.node.json scripts/figma-push-tokens.ts"
+    "figma:export-tokens": "npx tsx scripts/figma-push-tokens.ts"
   },
   "dependencies": {
     "next": "15.3.1",
