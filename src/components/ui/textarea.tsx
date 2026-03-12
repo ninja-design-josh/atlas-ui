@@ -20,7 +20,8 @@ export function Textarea({
   disabled,
   ...props
 }: TextareaProps) {
-  const textareaId = id ?? React.useId();
+  const generatedId = React.useId();
+  const textareaId = id ?? generatedId;
   const hintId = hint ? `${textareaId}-hint` : undefined;
   const errorId = error ? `${textareaId}-error` : undefined;
 

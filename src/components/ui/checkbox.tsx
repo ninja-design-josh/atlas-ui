@@ -22,7 +22,8 @@ export function Checkbox({
   className,
   ...props
 }: CheckboxProps) {
-  const checkboxId = id ?? React.useId();
+  const generatedId = React.useId();
+  const checkboxId = id ?? generatedId;
 
   return (
     <div className={cn("flex items-start gap-2.5", className)}>

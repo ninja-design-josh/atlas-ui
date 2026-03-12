@@ -24,7 +24,8 @@ export function Switch({
   onChange,
   className,
 }: SwitchProps) {
-  const switchId = id ?? React.useId();
+  const generatedId = React.useId();
+  const switchId = id ?? generatedId;
   const [internalChecked, setInternalChecked] = React.useState(
     defaultChecked ?? false
   );

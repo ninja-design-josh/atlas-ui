@@ -30,7 +30,8 @@ export function Select({
   disabled,
   ...props
 }: SelectProps) {
-  const selectId = id ?? React.useId();
+  const generatedId = React.useId();
+  const selectId = id ?? generatedId;
   const hintId = hint ? `${selectId}-hint` : undefined;
   const errorId = error ? `${selectId}-error` : undefined;
 
