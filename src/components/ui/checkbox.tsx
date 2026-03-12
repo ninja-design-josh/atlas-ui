@@ -4,15 +4,11 @@ import * as React from "react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export interface CheckboxProps {
+export interface CheckboxProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {
   label?: string;
   description?: string;
-  checked?: boolean;
-  defaultChecked?: boolean;
-  disabled?: boolean;
-  id?: string;
   onChange?: (checked: boolean) => void;
-  className?: string;
 }
 
 export function Checkbox({
@@ -24,6 +20,7 @@ export function Checkbox({
   id,
   onChange,
   className,
+  ...props
 }: CheckboxProps) {
   const checkboxId = id ?? React.useId();
 
@@ -45,6 +42,7 @@ export function Checkbox({
             dark:checked:bg-blue-100 dark:checked:border-blue-100
             cursor-pointer"
           aria-describedby={description ? `${checkboxId}-desc` : undefined}
+          {...props}
         />
         <Check
           className="pointer-events-none absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 stroke-[3]"
