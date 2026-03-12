@@ -168,7 +168,7 @@
       "props": [
         { "name": "src", "type": "string", "default": "undefined", "description": "Image URL. Falls back to initials or icon on error." },
         { "name": "initials", "type": "string", "default": "undefined", "description": "1-2 letter initials shown when no image is available." },
-        { "name": "alt", "type": "string", "default": "\"\"", "description": "REQUIRED for accessibility — used as aria-label when no image is shown." },
+        { "name": "alt", "type": "string", "default": "\"\"", "description": "Strongly recommended. Provide person's name. Defaults to empty string; omitting leaves fallback states unlabeled for screen readers." },
         { "name": "size", "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"", "default": "\"md\"", "description": "sm=24px, md=32px, lg=40px, xl=56px." }
       ],
       "doPatterns": [
@@ -184,7 +184,7 @@
       "name": "Card",
       "description": "Surface container for grouping related content. Compose with CardHeader, CardTitle, CardDescription, CardFooter.",
       "import": "@/components/ui/card",
-      "exports": ["Card", "CardHeader", "CardTitle", "CardDescription", "CardFooter", "CardProps", "CardPadding", "CardElevation"],
+      "exports": ["Card", "CardHeader", "CardTitle", "CardDescription", "CardFooter", "CardProps", "CardHeaderProps", "CardTitleProps", "CardDescriptionProps", "CardFooterProps", "CardPadding", "CardElevation"],
       "props": [
         { "name": "padding", "type": "\"none\" | \"sm\" | \"md\" | \"lg\"", "default": "\"md\"", "description": "Inner padding. none=0, sm=12px, md=20px, lg=32px." },
         { "name": "border", "type": "boolean", "default": "true", "description": "Shows a subtle border around the card." },
