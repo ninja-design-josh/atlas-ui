@@ -1,0 +1,20 @@
+{
+  "name": "Atlas UI",
+  "description": "NinjaCat's component library based on the Bento design system",
+  "framework": "next",
+  "nextVersion": "15",
+  "tailwind": "v4",
+  "font": {
+    "family": "Inter",
+    "source": "google",
+    "features": ["cv02", "cv03", "cv04", "cv11"],
+    "weights": [400, 500, 600, 700],
+    "cssVar": "--font-inter"
+  },
+  "registry": "/registry",
+  "tokens": "/api/tokens.json",
+  "components": "/registry/index.json",
+  "import_pattern": "@/components/ui/{name}",
+  "figma": "AjwZJsf64tNSbbSSLF234H",
+  "darkMode": { "strategy": "class", "selector": "html.dark" }
+}

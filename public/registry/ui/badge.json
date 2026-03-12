@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Small status or label indicator.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type BadgeVariant =\n  | \"default\"\n  | \"success\"\n  | \"warning\"\n  | \"error\"\n  | \"info\"\n  | \"purple\";\nexport type BadgeSize = \"sm\" | \"md\";\n\n/**\n * Props for the Badge component.\n * @see Badge\n */\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  variant?: BadgeVariant;\n  size?: BadgeSize;\n  dot?: boolean;\n  status?: boolean;\n}\n\nconst variantStyles: Record<BadgeVariant, string> = {\n  default: \"bg-grey-10 text-grey-70 dark:bg-grey-90 dark:text-grey-40\",\n  success: \"bg-green-5 text-green-100\",\n  warning: \"bg-yellow-10 text-yellow-dark\",\n  error:   \"bg-red-5 text-red-100\",\n  info:    \"bg-blue-5 text-blue-100\",\n  purple:  \"bg-purple-5 text-purple-100\",\n};\n\nconst dotColors: Record<BadgeVariant, string> = {\n  default: \"bg-grey-50\",\n  success: \"bg-green-100\",\n  warning: \"bg-yellow-100\",\n  error:   \"bg-red-100\",\n  info:    \"bg-blue-100\",\n  purple:  \"bg-purple-100\",\n};\n\nconst sizeStyles: Record<BadgeSize, string> = {\n  sm: \"px-1.5 py-0.5 text-[10px]\",\n  md: \"px-2   py-0.5 text-xs\",\n};\n\n/**\n * Small status or label indicator. Use `variant` to convey semantic meaning.\n *\n * Set `status={true}` to add `role=\"status\"` for live-region announcements\n * (e.g., a count that updates dynamically).\n *\n * @example\n * <Badge variant=\"success\">Active</Badge>\n * <Badge variant=\"error\" dot>3 errors</Badge>\n * <Badge variant=\"info\" status>Loading...</Badge>\n */\nexport function Badge({\n  variant = \"default\",\n  size = \"md\",\n  dot = false,\n  status = false,\n  children,\n  className,\n  ...props\n}: BadgeProps) {\n  return (\n    <span\n      className={cn(\n        \"inline-flex items-center gap-1.5 rounded-full font-medium\",\n        variantStyles[variant],\n        sizeStyles[size],\n        className\n      )}\n      role={status ? \"status\" : undefined}\n      {...props}\n    >\n      {dot && (\n        <span\n          className={cn(\"h-1.5 w-1.5 rounded-full flex-shrink-0\", dotColors[variant])}\n          aria-hidden=\"true\"\n        />\n      )}\n      {children}\n    </span>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

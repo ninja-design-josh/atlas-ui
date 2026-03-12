@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Multi-line text input with label, hint, and error state.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/textarea.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Props for the Textarea component.\n * @see Textarea\n */\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  label?: string;\n  hint?: string;\n  error?: string;\n}\n\n/**\n * Multi-line text input with optional label, hint, and error state.\n * Vertically resizable by default.\n *\n * @example\n * <Textarea label=\"Description\" hint=\"Max 500 characters.\" rows={5} />\n * <Textarea label=\"Bio\" error=\"Bio cannot be empty.\" />\n */\nexport function Textarea({\n  label,\n  hint,\n  error,\n  id,\n  rows = 4,\n  className,\n  disabled,\n  ...props\n}: TextareaProps) {\n  const generatedId = React.useId();\n  const textareaId = id ?? generatedId;\n  const hintId = hint ? `${textareaId}-hint` : undefined;\n  const errorId = error ? `${textareaId}-error` : undefined;\n\n  return (\n    <div className=\"flex flex-col gap-1 w-full\">\n      {label && (\n        <label\n          htmlFor={textareaId}\n          className=\"text-form-label text-text-secondary\"\n        >\n          {label}\n        </label>\n      )}\n      <textarea\n        id={textareaId}\n        rows={rows}\n        disabled={disabled}\n        aria-describedby={errorId ?? hintId}\n        aria-invalid={!!error}\n        className={cn(\n          \"w-full rounded-sm border px-3 py-2 text-sm text-grey-100 placeholder:text-grey-40 bg-surface\",\n          \"transition-colors resize-y\",\n          \"focus:outline-none focus:border-blue-100\",\n          \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-grey-5\",\n          \"dark:bg-grey-110 dark:text-grey-10 dark:placeholder:text-grey-60 dark:border-grey-80\",\n          \"dark:focus:border-blue-50\",\n          error\n            ? \"border-red-100 focus:border-red-100\"\n            : \"border-grey-20\",\n          className\n        )}\n        {...props}\n      />\n      {error && (\n        <p id={errorId} className=\"text-caption text-red-100\" role=\"alert\">\n          {error}\n        </p>\n      )}\n      {!error && hint && (\n        <p id={hintId} className=\"text-caption text-grey-70 dark:text-grey-50\">\n          {hint}\n        </p>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

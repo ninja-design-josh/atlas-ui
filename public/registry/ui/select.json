@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select",
+  "type": "registry:ui",
+  "title": "Select",
+  "description": "Native select styled to match Atlas UI.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ChevronDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * An individual option in a Select component.\n */\nexport interface SelectOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n}\n\n/**\n * Props for the Select component.\n * @see Select\n */\nexport interface SelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  label?: string;\n  hint?: string;\n  error?: string;\n  options: SelectOption[];\n  placeholder?: string;\n}\n\n/**\n * Native `<select>` styled to match Atlas UI.\n * Pass `options` as `{ value, label, disabled? }[]`.\n *\n * @example\n * <Select\n *   label=\"Role\"\n *   options={[{ value: \"admin\", label: \"Admin\" }, { value: \"viewer\", label: \"Viewer\" }]}\n *   placeholder=\"Select a role...\"\n * />\n */\nexport function Select({\n  label,\n  hint,\n  error,\n  options,\n  placeholder,\n  id,\n  className,\n  disabled,\n  ...props\n}: SelectProps) {\n  const generatedId = React.useId();\n  const selectId = id ?? generatedId;\n  const hintId = hint ? `${selectId}-hint` : undefined;\n  const errorId = error ? `${selectId}-error` : undefined;\n\n  return (\n    <div className=\"flex flex-col gap-1 w-full\">\n      {label && (\n        <label\n          htmlFor={selectId}\n          className=\"text-form-label text-text-secondary\"\n        >\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <select\n          id={selectId}\n          disabled={disabled}\n          aria-describedby={errorId ?? hintId}\n          aria-invalid={!!error}\n          className={cn(\n            \"h-10 w-full appearance-none rounded-sm border bg-surface px-3 pr-9 text-sm text-grey-100 transition-colors\",\n            \"focus:outline-none focus:border-blue-100\",\n            \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-grey-5\",\n            \"dark:bg-grey-110 dark:text-grey-10 dark:border-grey-80\",\n            \"dark:focus:border-blue-50\",\n            error\n              ? \"border-red-100 focus:border-red-100\"\n              : \"border-grey-20\",\n            className\n          )}\n          {...props}\n        >\n          {placeholder && (\n            <option value=\"\" disabled>\n              {placeholder}\n            </option>\n          )}\n          {options.map((opt) => (\n            <option key={opt.value} value={opt.value} disabled={opt.disabled}>\n              {opt.label}\n            </option>\n          ))}\n        </select>\n        <ChevronDown\n          className=\"pointer-events-none absolute right-3 h-4 w-4 text-grey-50 dark:text-grey-40\"\n          aria-hidden=\"true\"\n        />\n      </div>\n      {error && (\n        <p id={errorId} className=\"text-caption text-red-100\" role=\"alert\">\n          {error}\n        </p>\n      )}\n      {!error && hint && (\n        <p id={hintId} className=\"text-caption text-grey-70 dark:text-grey-50\">\n          {hint}\n        </p>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

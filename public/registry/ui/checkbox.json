@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Controlled or uncontrolled checkbox with label support.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Props for the Checkbox component.\n * @see Checkbox\n */\nexport interface CheckboxProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {\n  label?: string;\n  description?: string;\n  onChange?: (checked: boolean) => void;\n}\n\n/**\n * Controlled or uncontrolled checkbox with label and description support.\n *\n * `onChange` receives the boolean checked value directly (not the native event).\n * Pass native input attrs (name, value, required) — they flow through to the input.\n *\n * @example\n * <Checkbox label=\"Accept terms\" description=\"Required to continue.\" />\n * <Checkbox label=\"Subscribe\" checked={value} onChange={setValue} />\n */\nexport function Checkbox({\n  label,\n  description,\n  checked,\n  defaultChecked,\n  disabled,\n  id,\n  onChange,\n  className,\n  ...props\n}: CheckboxProps) {\n  const generatedId = React.useId();\n  const checkboxId = id ?? generatedId;\n\n  return (\n    <div className={cn(\"flex items-start gap-2.5\", className)}>\n      <div className=\"relative flex h-5 w-5 flex-shrink-0 items-center justify-center mt-0.5\">\n        <input\n          id={checkboxId}\n          checked={checked}\n          defaultChecked={defaultChecked}\n          disabled={disabled}\n          onChange={(e) => onChange?.(e.target.checked)}\n          className=\"peer h-5 w-5 appearance-none rounded border border-grey-30 bg-white transition-colors\n            checked:bg-blue-100 checked:border-blue-100\n            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-100 focus-visible:ring-offset-1\n            disabled:cursor-not-allowed disabled:opacity-50\n            dark:bg-grey-110 dark:border-grey-70\n            dark:checked:bg-blue-100 dark:checked:border-blue-100\n            cursor-pointer\"\n          aria-describedby={description ? `${checkboxId}-desc` : undefined}\n          {...props}\n          type=\"checkbox\"\n        />\n        <Check\n          className=\"pointer-events-none absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 stroke-[3]\"\n          aria-hidden=\"true\"\n        />\n      </div>\n      {(label || description) && (\n        <div className=\"flex flex-col gap-0.5\">\n          {label && (\n            <label\n              htmlFor={checkboxId}\n              className={cn(\n                \"text-sm font-medium text-grey-100 dark:text-grey-10 leading-none cursor-pointer\",\n                disabled && \"cursor-not-allowed opacity-50\"\n              )}\n            >\n              {label}\n            </label>\n          )}\n          {description && (\n            <p\n              id={`${checkboxId}-desc`}\n              className=\"text-[11px] text-grey-70 dark:text-grey-50\"\n            >\n              {description}\n            </p>\n          )}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

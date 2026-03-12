@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "User avatar with image, initials, or fallback icon.",
+  "dependencies": [
+    "next"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/avatar.tsx",
+      "content": "import * as React from \"react\";\nimport Image from \"next/image\";\nimport { cn } from \"@/lib/utils\";\n\nexport type AvatarSize = \"sm\" | \"md\" | \"lg\" | \"xl\";\n\n/**\n * Props for the Avatar component.\n * @see Avatar\n */\nexport interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {\n  src?: string;\n  initials?: string;\n  alt?: string;\n  size?: AvatarSize;\n}\n\nconst sizeStyles: Record<AvatarSize, string> = {\n  sm: \"h-6 w-6 text-[10px]\",\n  md: \"h-8 w-8 text-xs\",\n  lg: \"h-10 w-10 text-sm\",\n  xl: \"h-14 w-14 text-base\",\n};\n\n/**\n * User avatar — shows image, initials, or a generic person icon as fallback.\n *\n * Always provide `alt` for accessibility. When no image is shown, `alt`\n * becomes the `aria-label` on the container element.\n *\n * @example\n * <Avatar src=\"/users/josh.jpg\" alt=\"Josh Brinksman\" size=\"md\" />\n * <Avatar initials=\"JB\" alt=\"Josh Brinksman\" size=\"lg\" />\n * <Avatar alt=\"Unknown user\" size=\"sm\" />\n */\nexport function Avatar({\n  src,\n  initials,\n  alt = \"\",\n  size = \"md\",\n  className,\n  ...props\n}: AvatarProps) {\n  const [imgError, setImgError] = React.useState(false);\n  const showFallback = !src || imgError;\n\n  return (\n    <div\n      className={cn(\n        \"relative inline-flex flex-shrink-0 items-center justify-center overflow-hidden rounded-full\",\n        \"bg-grey-10 dark:bg-grey-90\",\n        sizeStyles[size],\n        className\n      )}\n      aria-label={showFallback && alt ? alt : undefined}\n      role={showFallback && alt ? \"img\" : undefined}\n      {...props}\n    >\n      {!showFallback && (\n        <Image\n          src={src!}\n          alt={alt}\n          fill\n          onError={() => setImgError(true)}\n          className=\"object-cover\"\n        />\n      )}\n      {showFallback && initials && (\n        <span className=\"font-semibold text-grey-70 dark:text-grey-40 leading-none uppercase\">\n          {initials.slice(0, 2)}\n        </span>\n      )}\n      {showFallback && !initials && (\n        <svg\n          className=\"h-3/4 w-3/4 text-grey-40\"\n          viewBox=\"0 0 24 24\"\n          fill=\"currentColor\"\n          aria-hidden=\"true\"\n        >\n          <path d=\"M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z\" />\n        </svg>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

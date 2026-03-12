@@ -48,7 +48,7 @@ export function Input({
       {label && (
         <label
           htmlFor={inputId}
-          className="text-sm font-normal text-grey-70 dark:text-grey-40"
+          className="text-form-label text-text-secondary"
         >
           {label}
         </label>

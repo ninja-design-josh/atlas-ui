@@ -42,7 +42,7 @@ export function Textarea({
       {label && (
         <label
           htmlFor={textareaId}
-          className="text-sm font-normal text-grey-70 dark:text-grey-40"
+          className="text-form-label text-text-secondary"
         >
           {label}
         </label>

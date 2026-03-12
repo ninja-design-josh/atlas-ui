@@ -82,7 +82,7 @@ export function ComponentSection({
   ]);
 
   return (
-    <article className="max-w-3xl">
+    <article className="max-w-3xl" data-registry={name.toLowerCase().replace(/\s+/g, '-')}>
       {/* Breadcrumb */}
       {breadcrumb.length > 0 && (
         <nav

@@ -163,6 +163,7 @@ const NAV_ITEMS: NavItem[] = [
   { type: "top-section", label: "Contributing",   href: "/contributing" },
   { type: "top-section", label: "Tools",          href: "/tools" },
   { type: "top-section", label: "Version guides", href: "/version-guides" },
+  { type: "top-section", label: "Release notes",  href: "/release-notes" },
 ];
 
 const SEARCH_ITEMS = [

@@ -41,3 +41,6 @@ tokens-export.json
 # crawl/screenshot outputs
 audit/
 scripts/screenshots/
+
+# playwright runtime artifacts
+.playwright-mcp/

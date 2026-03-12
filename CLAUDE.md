@@ -12,13 +12,31 @@ npm run lint     # ESLint via next lint
 
 No test suite exists in this project.
 
+## AI Prototyping Tools
+
+Atlas UI ships machine-readable endpoints so Claude Code, v0, and other AI tools can discover and scaffold from it with zero manual setup.
+
+| Resource | Path | Purpose |
+|----------|------|---------|
+| `atlas.config.json` | project root | One-time manifest: framework, tokens URL, registry URL, Figma key, dark mode strategy |
+| `/api/tokens.json` | `src/app/api/tokens/route.ts` | Structured design token JSON (grey, blue, semantic, radius, shadow, darkOverrides) |
+| `/registry/index.json` | `public/registry/index.json` | shadcn-compatible component manifest |
+| `/registry/ui/{name}.json` | `public/registry/ui/` | Per-component JSON with full source embedded in `files[0].content` |
+| `/registry/colors.json` | `public/registry/colors.json` | Flat map of all primitive color tokens |
+| `/registry/styles/default.json` | `public/registry/styles/default.json` | All CSS variable definitions |
+
+Component pages render `<article data-registry="{name}">` so DOM scrapers can locate docs.
+
+When design tokens change, update both `src/app/globals.css` **and** `src/app/api/tokens/route.ts`.
+
 ## Architecture
 
 **Atlas UI** is a Next.js 15 App Router component library / prototype environment based on the Bento design system (Figma: `AjwZJsf64tNSbbSSLF234H`).
 
 ### Routing & Pages
-- `src/app/page.tsx` — Single showcase page; all components are documented here with live previews, code snippets, and props tables. New prototype pages get added as new routes under `src/app/`.
-- `src/app/layout.tsx` — Sets up Inter font (CSS var `--font-inter`) and imports `globals.css`.
+- `src/app/(docs)/` — Route group containing per-component doc pages (e.g. `/components/button`). Each page uses `ComponentSection` with examples, props, best practices, and accessibility docs.
+- `src/app/layout.tsx` — Sets up Inter font (CSS var `--font-inter`), global sidebar/header shell, and imports `globals.css`.
+- New prototype pages get added as new routes under `src/app/`.
 
 ### Styling System
 All design tokens live in `src/app/globals.css` inside a `@theme {}` block (Tailwind CSS v4 syntax). Dark mode is **class-based** (`class="dark"` on `<html>`) — not media query — controlled by a JS toggle in `page.tsx`. Dark semantic overrides are in a `.dark {}` block in the same file.
@@ -36,10 +54,9 @@ Token naming conventions:
 - Icons come from `lucide-react`.
 
 ### Docs Components
-`src/components/docs/` contains four helper components used only in `page.tsx`:
-- `ComponentSection` — section wrapper with id, heading, description, and "When to use" callout
-- `DocSubheading` — overline-style subheading
-- `LivePreview` — renders a component preview in a framed container
+`src/components/docs/` contains helper components used in component doc pages:
+- `ComponentSection` — page wrapper with breadcrumb, title, status badge, examples (tab + preview + code), props table, best practices, related components, and accessibility sections. Renders `<article data-registry="{name}">` for AI tooling.
+- `DocSubheading` — overline-style subheading (legacy, kept for backward compat)
 - `PropsTable` — renders a typed props table from a `PropDef[]` array
 - `CodeBlock` — syntax-highlighted code snippet display
 
