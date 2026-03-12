@@ -58,9 +58,9 @@ All components live in `src/components/ui/`. Import pattern: `import { Component
 | `Input` | `@/components/ui/input` | `label`, `hint`, `error`, `leadingIcon`, `trailingIcon` |
 | `Textarea` | `@/components/ui/textarea` | `label`, `hint`, `error`, `rows` |
 | `Select` | `@/components/ui/select` | `options` (required), `label`, `placeholder`, `hint`, `error` |
-| `Checkbox` | `@/components/ui/checkbox` | `label`, `description`, `checked`, `onChange` |
-| `Switch` | `@/components/ui/switch` | `label`, `description`, `checked`, `onChange` |
-| `Badge` | `@/components/ui/badge` | `variant` (default/success/warning/error/info/purple), `size` (sm/md), `dot`, `status` |
+| `Checkbox` | `@/components/ui/checkbox` | `label`, `description`, `checked`, `defaultChecked`, `onChange` |
+| `Switch` | `@/components/ui/switch` | `label`, `description`, `checked`, `defaultChecked`, `onChange` |
+| `Badge` | `@/components/ui/badge` | `variant` (default/success/warning/error/info/purple), `size` (sm/md), `dot`, `status` (adds `role="status"` for live regions) |
 | `Avatar` | `@/components/ui/avatar` | `src`, `initials`, `alt` (always provide), `size` (sm/md/lg/xl) |
 | `Card` | `@/components/ui/card` | `padding` (none/sm/md/lg), `border`, `elevation` (0/1/2/4/8) |
 | `CardHeader` | `@/components/ui/card` | — |
