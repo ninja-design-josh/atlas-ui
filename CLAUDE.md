@@ -47,3 +47,96 @@ Token naming conventions:
 1. Create `src/components/ui/[name].tsx` following the existing pattern (typed interface, `cn()` for classes, spread `...props`).
 2. Add a `ComponentSection` block in `page.tsx` with import, usage snippet, props table, and live preview.
 3. Update `NAV_ITEMS` in `page.tsx` to include the new component in the sidebar.
+
+## Component Inventory
+
+All components live in `src/components/ui/`. Import pattern: `import { ComponentName } from "@/components/ui/component-name"`.
+
+| Component | Import | Key Props |
+|-----------|--------|-----------|
+| `Button` | `@/components/ui/button` | `variant` (solid/outlined/ghost), `color` (primary/secondary/danger), `size` (sm/md/lg), `loading`, `leftIcon`, `rightIcon` |
+| `Input` | `@/components/ui/input` | `label`, `hint`, `error`, `leadingIcon`, `trailingIcon` |
+| `Textarea` | `@/components/ui/textarea` | `label`, `hint`, `error`, `rows` |
+| `Select` | `@/components/ui/select` | `options` (required), `label`, `placeholder`, `hint`, `error` |
+| `Checkbox` | `@/components/ui/checkbox` | `label`, `description`, `checked`, `onChange` |
+| `Switch` | `@/components/ui/switch` | `label`, `description`, `checked`, `onChange` |
+| `Badge` | `@/components/ui/badge` | `variant` (default/success/warning/error/info/purple), `size` (sm/md), `dot`, `status` |
+| `Avatar` | `@/components/ui/avatar` | `src`, `initials`, `alt` (always provide), `size` (sm/md/lg/xl) |
+| `Card` | `@/components/ui/card` | `padding` (none/sm/md/lg), `border`, `elevation` (0/1/2/4/8) |
+| `CardHeader` | `@/components/ui/card` | — |
+| `CardTitle` | `@/components/ui/card` | — |
+| `CardDescription` | `@/components/ui/card` | — |
+| `CardFooter` | `@/components/ui/card` | — |
+
+Full machine-readable spec: `src/registry.json`
+
+## Prop Naming Conventions
+
+These conventions are enforced across ALL components:
+- `variant` — visual style (never `type`, `style`, `mode`)
+- `color` — semantic color role (never `colorVariant`, `scheme`, `intent`)
+- `size` — sizing (never `buttonSize`, `s`, `sz`)
+- `disabled` — native HTML attribute, always passed through
+- `className` — always last, always merged via `cn()`
+- Icon props: `leftIcon` / `rightIcon` for buttons, `leadingIcon` / `trailingIcon` for inputs
+
+## Semantic Tokens
+
+Use semantic tokens in className for any custom styling. Never use primitive tokens for text or backgrounds.
+
+| Token | Light value | Use for |
+|-------|-------------|---------|
+| `text-text-primary` | grey-100 | Body text, headings |
+| `text-text-secondary` | grey-70 | Labels, hints, captions |
+| `text-text-error` | red-100 | Error messages |
+| `text-text-link` | blue-100 | Anchor text |
+| `bg-surface` | white | Page background |
+| `bg-surface-subtle` | grey-2 | Section backgrounds |
+| `bg-surface-raised` | white | Card backgrounds |
+| `border-border` | grey-10 | Default borders |
+| `border-border-strong` | grey-30 | Emphasized borders |
+
+## Composition Patterns
+
+### Settings form inside a card
+```tsx
+<Card padding="md">
+  <CardHeader>
+    <CardTitle>Account Settings</CardTitle>
+    <CardDescription>Manage your profile.</CardDescription>
+  </CardHeader>
+  <div className="space-y-4">
+    <Input label="Display name" placeholder="Your name" />
+    <Select label="Role" options={ROLE_OPTIONS} />
+  </div>
+  <CardFooter>
+    <Button variant="outlined" color="secondary">Cancel</Button>
+    <Button variant="solid" color="primary">Save Changes</Button>
+  </CardFooter>
+</Card>
+```
+
+### Status row with badge and action
+```tsx
+<div className="flex items-center gap-2">
+  <Badge variant="error" dot>3 errors</Badge>
+  <Button variant="solid" color="danger" size="sm">Fix All</Button>
+</div>
+```
+
+### Search bar
+```tsx
+<div className="flex gap-2">
+  <Input leadingIcon={<Search />} placeholder="Search..." />
+  <Button variant="solid" color="primary">Search</Button>
+</div>
+```
+
+## Anti-Patterns to Avoid
+
+- **Never use primitive tokens for semantic purposes** — use `text-text-primary` not `text-grey-100`
+- **Never place two `solid/primary` buttons side by side**
+- **Never use `danger` color for non-destructive actions**
+- **Never use `<Switch>` inside a submit-form** — use `<Checkbox>` instead
+- **Never omit `alt` on Avatar** — initials and fallback states depend on it for screen readers
+- **Never nest Cards more than 1 level deep**
