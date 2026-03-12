@@ -1,0 +1,360 @@
+{
+  "Color": [
+    {
+      "name": "grey/0",
+      "collection": "Color",
+      "value": "#ffffff",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/2",
+      "collection": "Color",
+      "value": "#f9fafb",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/5",
+      "collection": "Color",
+      "value": "#f2f4f7",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/10",
+      "collection": "Color",
+      "value": "#e7eaef",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/20",
+      "collection": "Color",
+      "value": "#d5dae1",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/30",
+      "collection": "Color",
+      "value": "#bdc2cc",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/40",
+      "collection": "Color",
+      "value": "#a8aeba",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/50",
+      "collection": "Color",
+      "value": "#939aa7",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/60",
+      "collection": "Color",
+      "value": "#7e8694",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/70",
+      "collection": "Color",
+      "value": "#697280",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/80",
+      "collection": "Color",
+      "value": "#545d6b",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/90",
+      "collection": "Color",
+      "value": "#424a58",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/100",
+      "collection": "Color",
+      "value": "#2d3540",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/110",
+      "collection": "Color",
+      "value": "#202832",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/120",
+      "collection": "Color",
+      "value": "#151c25",
+      "type": "COLOR"
+    },
+    {
+      "name": "grey/130",
+      "collection": "Color",
+      "value": "#000000",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/dark",
+      "collection": "Color",
+      "value": "#1855cd",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/100",
+      "collection": "Color",
+      "value": "#1e66f0",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/50",
+      "collection": "Color",
+      "value": "#6691fa",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/20",
+      "collection": "Color",
+      "value": "#99b5fa",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/10",
+      "collection": "Color",
+      "value": "#ccdbfc",
+      "type": "COLOR"
+    },
+    {
+      "name": "blue/5",
+      "collection": "Color",
+      "value": "#e5edff",
+      "type": "COLOR"
+    },
+    {
+      "name": "green/100",
+      "collection": "Color",
+      "value": "#239b2a",
+      "type": "COLOR"
+    },
+    {
+      "name": "green/50",
+      "collection": "Color",
+      "value": "#8bca8e",
+      "type": "COLOR"
+    },
+    {
+      "name": "green/5",
+      "collection": "Color",
+      "value": "#f4faf4",
+      "type": "COLOR"
+    },
+    {
+      "name": "red/100",
+      "collection": "Color",
+      "value": "#eb0057",
+      "type": "COLOR"
+    },
+    {
+      "name": "red/50",
+      "collection": "Color",
+      "value": "#f27da8",
+      "type": "COLOR"
+    },
+    {
+      "name": "red/5",
+      "collection": "Color",
+      "value": "#f8edf1",
+      "type": "COLOR"
+    },
+    {
+      "name": "purple/dark",
+      "collection": "Color",
+      "value": "#450082",
+      "type": "COLOR"
+    },
+    {
+      "name": "purple/100",
+      "collection": "Color",
+      "value": "#7c1efa",
+      "type": "COLOR"
+    },
+    {
+      "name": "purple/50",
+      "collection": "Color",
+      "value": "#ba8cf9",
+      "type": "COLOR"
+    },
+    {
+      "name": "purple/5",
+      "collection": "Color",
+      "value": "#f3eef9",
+      "type": "COLOR"
+    },
+    {
+      "name": "yellow/dark",
+      "collection": "Color",
+      "value": "#d27412",
+      "type": "COLOR"
+    },
+    {
+      "name": "yellow/100",
+      "collection": "Color",
+      "value": "#f5a523",
+      "type": "COLOR"
+    },
+    {
+      "name": "yellow/50",
+      "collection": "Color",
+      "value": "#fad08c",
+      "type": "COLOR"
+    },
+    {
+      "name": "yellow/10",
+      "collection": "Color",
+      "value": "#fef6e9",
+      "type": "COLOR"
+    },
+    {
+      "name": "yellow/5",
+      "collection": "Color",
+      "value": "#fffbf5",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/lime",
+      "collection": "Color",
+      "value": "#96fd1a",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/aqua",
+      "collection": "Color",
+      "value": "#00eef8",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/navy",
+      "collection": "Color",
+      "value": "#140f4c",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/indigo",
+      "collection": "Color",
+      "value": "#36368f",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/mauve",
+      "collection": "Color",
+      "value": "#986cc1",
+      "type": "COLOR"
+    },
+    {
+      "name": "brand/teal",
+      "collection": "Color",
+      "value": "#179494",
+      "type": "COLOR"
+    },
+    {
+      "name": "text/primary",
+      "collection": "Color",
+      "value": "#2d3540",
+      "type": "COLOR"
+    },
+    {
+      "name": "text/secondary",
+      "collection": "Color",
+      "value": "#697280",
+      "type": "COLOR"
+    },
+    {
+      "name": "text/error",
+      "collection": "Color",
+      "value": "#eb0057",
+      "type": "COLOR"
+    },
+    {
+      "name": "text/link",
+      "collection": "Color",
+      "value": "#1e66f0",
+      "type": "COLOR"
+    },
+    {
+      "name": "text/white",
+      "collection": "Color",
+      "value": "#ffffff",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/primary",
+      "collection": "Color",
+      "value": "#2d3540",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/secondary",
+      "collection": "Color",
+      "value": "#697280",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/red",
+      "collection": "Color",
+      "value": "#eb0057",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/green",
+      "collection": "Color",
+      "value": "#239b2a",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/blue",
+      "collection": "Color",
+      "value": "#1e66f0",
+      "type": "COLOR"
+    },
+    {
+      "name": "icon/yellow",
+      "collection": "Color",
+      "value": "#d27412",
+      "type": "COLOR"
+    },
+    {
+      "name": "surface",
+      "collection": "Color",
+      "value": "#ffffff",
+      "type": "COLOR"
+    },
+    {
+      "name": "surface/subtle",
+      "collection": "Color",
+      "value": "#f9fafb",
+      "type": "COLOR"
+    },
+    {
+      "name": "surface/raised",
+      "collection": "Color",
+      "value": "#ffffff",
+      "type": "COLOR"
+    },
+    {
+      "name": "border",
+      "collection": "Color",
+      "value": "#e7eaef",
+      "type": "COLOR"
+    },
+    {
+      "name": "border/strong",
+      "collection": "Color",
+      "value": "#bdc2cc",
+      "type": "COLOR"
+    }
+  ],
+  "Spacing": [],
+  "Typography": []
+}
