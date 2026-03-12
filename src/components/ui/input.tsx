@@ -19,8 +19,8 @@ export interface InputProps
 /**
  * Text input field with optional label, hint, error, and icon support.
  *
- * Generates unique IDs automatically — do not pass `id` unless you need
- * to reference it externally (e.g., for a custom label).
+ * An `id` is generated automatically; pass your own only when you need
+ * to reference it from an external label or element.
  *
  * @example
  * <Input label="Email" hint="We'll never share this." placeholder="you@example.com" />

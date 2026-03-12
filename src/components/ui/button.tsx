@@ -59,7 +59,7 @@ const variants: Record<ButtonVariant, Record<ButtonColor, string>> = {
 };
 
 /**
- * Primary action trigger for all clickable actions in NinjaCat UI.
+ * Primary action trigger for all clickable actions in Atlas UI.
  *
  * Use `solid` for the main CTA, `outlined` for secondary actions,
  * `ghost` for low-emphasis tertiary actions.
