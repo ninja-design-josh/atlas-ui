@@ -14,6 +14,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
   size?: BadgeSize;
   dot?: boolean;
+  status?: boolean;
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
@@ -43,6 +44,7 @@ export function Badge({
   variant = "default",
   size = "md",
   dot = false,
+  status = false,
   children,
   className,
   ...props
@@ -55,6 +57,7 @@ export function Badge({
         sizeStyles[size],
         className
       )}
+      role={status ? "status" : undefined}
       {...props}
     >
       {dot && (

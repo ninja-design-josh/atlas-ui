@@ -36,6 +36,8 @@ export function Avatar({
         sizeStyles[size],
         className
       )}
+      aria-label={showFallback && alt ? alt : undefined}
+      role={showFallback && alt ? "img" : undefined}
       {...props}
     >
       {!showFallback && (
