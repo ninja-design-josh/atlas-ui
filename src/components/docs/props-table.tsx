@@ -3,59 +3,85 @@ import { cn } from "@/lib/utils";
 
 export interface PropDef {
   name: string;
-  type: string;
+  type: string;          // e.g. '"solid" | "outlined" | "ghost"'
   default?: string;
   required?: boolean;
   description: string;
+  deprecated?: string;   // if provided, show Deprecated badge with this text
 }
 
 interface PropsTableProps {
   props: PropDef[];
+  componentName?: string;
   className?: string;
 }
 
-export function PropsTable({ props, className }: PropsTableProps) {
+export function PropsTable({ props, componentName, className }: PropsTableProps) {
   return (
-    <div className={cn("overflow-x-auto rounded-sm border border-grey-10 dark:border-grey-90", className)}>
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-grey-5 dark:bg-grey-110">
-            <th className="text-left px-4 py-2.5 font-semibold text-grey-100 dark:text-grey-10 border-b border-grey-10 dark:border-grey-90 whitespace-nowrap">Prop</th>
-            <th className="text-left px-4 py-2.5 font-semibold text-grey-100 dark:text-grey-10 border-b border-grey-10 dark:border-grey-90">Type</th>
-            <th className="text-left px-4 py-2.5 font-semibold text-grey-100 dark:text-grey-10 border-b border-grey-10 dark:border-grey-90 whitespace-nowrap">Default</th>
-            <th className="text-left px-4 py-2.5 font-semibold text-grey-100 dark:text-grey-10 border-b border-grey-10 dark:border-grey-90">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.map((prop, index) => (
-            <tr
-              key={prop.name}
-              className={cn(
-                "border-b border-grey-10 dark:border-grey-90 last:border-0",
-                index % 2 === 0 ? "bg-white dark:bg-grey-110" : "bg-grey-2 dark:bg-grey-120"
+    <div className={cn("rounded-lg border border-border overflow-hidden font-mono text-sm", className)}>
+      {/* interface header */}
+      {componentName && (
+        <div className="px-5 py-3 bg-surface-subtle border-b border-border text-text-secondary">
+          {"interface "}
+          <span className="text-text-primary font-semibold">{componentName}Props</span>
+          {" {"}
+        </div>
+      )}
+
+      {/* prop rows */}
+      <div className="divide-y divide-border">
+        {props.map((prop) => (
+          <div key={prop.name} className="px-5 py-4">
+            {/* prop name + type */}
+            <div className="flex items-start gap-3 flex-wrap mb-1.5">
+              <span className="text-text-primary font-semibold">
+                {prop.name}{!prop.required && "?"}
+              </span>
+              <span className="flex flex-wrap items-center gap-1 text-text-secondary">
+                {prop.type.split("|").map((t, i, arr) => (
+                  <React.Fragment key={i}>
+                    <span className="text-[#6B46C1] dark:text-purple-50">{t.trim()}</span>
+                    {i < arr.length - 1 && (
+                      <span className="text-grey-40 mx-0.5">|</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </span>
+            </div>
+            {/* description */}
+            <p className="text-xs font-sans text-text-secondary leading-relaxed">
+              {prop.description}
+              {prop.default && (
+                <span className="text-grey-50">
+                  {" "}Defaults to{" "}
+                  <code className="text-text-primary bg-surface-subtle px-1 rounded">
+                    {prop.default}
+                  </code>
+                  .
+                </span>
               )}
-            >
-              <td className="px-4 py-2.5 whitespace-nowrap">
-                <code className="font-mono text-blue-100 dark:text-blue-50 text-xs">
-                  {prop.name}
-                  {prop.required && <span className="text-red-100 ml-0.5">*</span>}
-                </code>
-              </td>
-              <td className="px-4 py-2.5">
-                <code className="font-mono text-purple-100 dark:text-purple-50 text-xs">{prop.type}</code>
-              </td>
-              <td className="px-4 py-2.5 whitespace-nowrap">
-                {prop.default ? (
-                  <code className="font-mono text-grey-70 dark:text-grey-50 text-xs">{prop.default}</code>
-                ) : (
-                  <span className="text-grey-30 dark:text-grey-70">—</span>
-                )}
-              </td>
-              <td className="px-4 py-2.5 text-grey-70 dark:text-grey-50 text-caption">{prop.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </p>
+            {/* deprecated badge */}
+            {prop.deprecated && (
+              <div className="mt-2 flex items-center gap-2">
+                <span className="text-[10px] font-sans font-semibold px-1.5 py-0.5 rounded bg-yellow-50 text-yellow-900 border border-yellow-200 uppercase tracking-wide">
+                  Deprecated
+                </span>
+                <span className="text-xs font-sans text-text-secondary">
+                  {prop.deprecated}
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* interface footer */}
+      {componentName && (
+        <div className="px-5 py-3 bg-surface-subtle border-t border-border text-text-secondary">
+          {"}"}
+        </div>
+      )}
     </div>
   );
 }
