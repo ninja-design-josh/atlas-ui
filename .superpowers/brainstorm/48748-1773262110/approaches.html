@@ -1,0 +1,100 @@
+<h2>Three Approaches to World-Class Atlas UI</h2>
+<p class="subtitle">Which strategy best matches NinjaCat's goals? Click to select.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Deep Foundation First</h3>
+      <p>Don't add components yet. Build the infrastructure that makes AI tools work perfectly with the 9 existing components — then expand systematically.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros">
+          <h4>What you build</h4>
+          <ul>
+            <li>Component registry (JSON/MDX) — machine-readable spec AI can consume</li>
+            <li><code>llms.txt</code> + AI context files for Claude, Replit, v0</li>
+            <li>Figma Code Connect — two-way sync between Figma & components</li>
+            <li>Interactive docs upgrade (live props editor, dark/light toggle)</li>
+            <li>Design token automation (Figma → CSS → code pipeline)</li>
+            <li>Accessibility audit + ARIA on all 9 components</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Trade-offs</h4>
+          <ul>
+            <li>Slower to feel "complete" — still 9 components for a while</li>
+            <li>High upfront infrastructure investment</li>
+            <li>Payoff is compounding — each new component benefits from the system</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:0.8rem;color:#1E66F0;font-weight:600">Best if: You want AI tools working consistently before expanding breadth</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Storybook-Powered Platform</h3>
+      <p>Migrate to Storybook as the documentation backbone — the industry standard used by MUI, Radix, and every major design system. AI tools already understand Storybook conventions.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros">
+          <h4>What you get</h4>
+          <ul>
+            <li>Interactive controls panel (live prop editing out of the box)</li>
+            <li>Figma plugin built into Storybook (side-by-side design vs. code)</li>
+            <li>Visual regression testing via Chromatic</li>
+            <li>Accessibility addon (a11y checks per component)</li>
+            <li>Industry-standard structure AI tools know deeply</li>
+            <li>Auto-generated docs from TypeScript types</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Trade-offs</h4>
+          <ul>
+            <li>Migration cost — rewrite all stories for existing 9 components</li>
+            <li>Storybook has its own opinions, may conflict with Next.js App Router</li>
+            <li>Heavier toolchain to maintain</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:0.8rem;color:#1E66F0;font-weight:600">Best if: You want the most battle-tested foundation with designer tooling built in</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Expand Breadth + AI Context in Parallel</h3>
+      <p>Rapidly grow to 40–60 components matching Figma coverage, while building AI-friendly structure (consistent APIs, JSDoc, TypeScript) as you go. Custom docs site gets upgraded alongside.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros">
+          <h4>What you build</h4>
+          <ul>
+            <li>Full component suite: modals, tables, toasts, tooltips, menus, tabs, accordions, datepickers, etc.</li>
+            <li>Consistent prop naming conventions across all components</li>
+            <li>JSDoc on every prop and component</li>
+            <li>Upgraded custom docs site with search, filtering, interactive previews</li>
+            <li>Component registry JSON alongside each component file</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Trade-offs</h4>
+          <ul>
+            <li>Risk of inconsistency if moving fast without strong conventions</li>
+            <li>Docs site needs significant investment to match Storybook's power</li>
+            <li>Harder to maintain — no automated visual regression</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:0.8rem;color:#1E66F0;font-weight:600">Best if: You need more component coverage immediately for AI tools to be useful</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:32px;padding:16px;background:rgba(30,102,240,0.06);border-radius:8px;border-left:3px solid #1E66F0">
+  <p class="label">My recommendation</p>
+  <p style="margin-top:6px">A hybrid of <strong>A + C</strong>: build the AI infrastructure foundation (registry, llms.txt, Figma Code Connect) in parallel with expanding component breadth — but skip the Storybook migration to avoid rewrite cost. The custom docs site can evolve into something more interactive without the toolchain overhead.</p>
+</div>

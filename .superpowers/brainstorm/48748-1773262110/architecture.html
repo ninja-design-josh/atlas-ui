@@ -1,0 +1,94 @@
+<h2>Atlas UI — Foundation Architecture</h2>
+<p class="subtitle">Six pillars that make Atlas world-class. Does this structure look right?</p>
+
+<div style="display:grid;gap:16px;margin-top:24px">
+
+  <!-- Flow diagram -->
+  <div style="background:#F9FAFB;border:1px solid #E7EAEF;border-radius:10px;padding:24px">
+    <p class="label" style="margin-bottom:16px">How it all connects</p>
+
+    <!-- Row 1: Source of Truth -->
+    <div style="display:flex;justify-content:center;margin-bottom:8px">
+      <div style="background:#140F4C;color:#fff;padding:10px 24px;border-radius:6px;font-weight:600;font-size:0.85rem;text-align:center">
+        Atlas UI Codebase<br><span style="font-weight:400;font-size:0.75rem;opacity:0.8">Source of Truth</span>
+      </div>
+    </div>
+
+    <!-- Arrows down -->
+    <div style="display:flex;justify-content:center;gap:80px;color:#697280;font-size:1.2rem;margin:4px 0">
+      <span>↓</span><span>↓</span><span>↓</span><span>↓</span>
+    </div>
+
+    <!-- Row 2: Four outputs -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:8px">
+
+      <div style="background:#fff;border:1px solid #D5DAE1;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:4px">🤖</div>
+        <div style="font-weight:600;font-size:0.8rem;color:#2D3540">AI Context Layer</div>
+        <div style="font-size:0.72rem;color:#697280;margin-top:4px">llms.txt<br>CLAUDE.md<br>registry.json<br>JSDoc on all props</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #D5DAE1;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:4px">🧱</div>
+        <div style="font-weight:600;font-size:0.8rem;color:#2D3540">Hardened Components</div>
+        <div style="font-size:0.72rem;color:#697280;margin-top:4px">Strict TypeScript<br>Consistent APIs<br>Accessibility (ARIA)<br>Full variant coverage</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #D5DAE1;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:4px">📖</div>
+        <div style="font-weight:600;font-size:0.8rem;color:#2D3540">Docs Site Upgrade</div>
+        <div style="font-size:0.72rem;color:#697280;margin-top:4px">Live props editor<br>Search + filtering<br>Copy-paste snippets<br>Do/Don't patterns</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #D5DAE1;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:4px">🔁</div>
+        <div style="font-weight:600;font-size:0.8rem;color:#2D3540">Figma Push</div>
+        <div style="font-size:0.72rem;color:#697280;margin-top:4px">Token export pipeline<br>Code Connect maps<br>Atlas → Figma sync<br>One-command push</div>
+      </div>
+
+    </div>
+
+    <!-- Arrows down -->
+    <div style="display:flex;justify-content:center;gap:80px;color:#697280;font-size:1.2rem;margin:4px 0">
+      <span>↓</span><span>↓</span><span>↓</span><span>↓</span>
+    </div>
+
+    <!-- Row 3: Consumers -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
+
+      <div style="background:#E5EDFF;border:1px solid #99B5FA;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:0.78rem;font-weight:600;color:#1855CD">Claude Code<br>Replit · v0</div>
+        <div style="font-size:0.7rem;color:#36368F;margin-top:3px">Consistent NinjaCat UI from any prompt</div>
+      </div>
+
+      <div style="background:#F4FAF4;border:1px solid #8BCA8E;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:0.78rem;font-weight:600;color:#239B2A">Developers</div>
+        <div style="font-size:0.7rem;color:#239B2A;margin-top:3px">Production-ready, accessible, typed</div>
+      </div>
+
+      <div style="background:#FEF6E9;border:1px solid #FAD08C;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:0.78rem;font-weight:600;color:#D27412">Designers · PMs</div>
+        <div style="font-size:0.7rem;color:#D27412;margin-top:3px">Interactive previews, visual alignment</div>
+      </div>
+
+      <div style="background:#F3EEF9;border:1px solid #BA8CF9;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:0.78rem;font-weight:600;color:#7C1EFA">Figma</div>
+        <div style="font-size:0.7rem;color:#7C1EFA;margin-top:3px">Reflects Atlas, always in sync</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Phase callout -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="background:#140F4C;color:#fff;border-radius:8px;padding:16px">
+      <p class="label" style="color:#96FD1A;margin-bottom:8px">Phase 1 — Now</p>
+      <p style="font-size:0.82rem;opacity:0.9">Lock in all four pillars across the existing 9 components. Every component gets: JSDoc, registry entry, ARIA, a11y, and Figma Code Connect mapping.</p>
+    </div>
+    <div style="background:#F9FAFB;border:1px solid #E7EAEF;border-radius:8px;padding:16px">
+      <p class="label" style="color:#1E66F0;margin-bottom:8px">Phase 2 — Next</p>
+      <p style="font-size:0.82rem;color:#545D6B">With the foundation proven, rapidly add 40–60 new components using the same system. Each new component is AI-ready on day one.</p>
+    </div>
+  </div>
+
+</div>
