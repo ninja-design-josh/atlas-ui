@@ -11,12 +11,12 @@ export function ComingSoon({ breadcrumb, name }: ComingSoonProps) {
     <div className="max-w-2xl">
       {/* Breadcrumb */}
       <nav
-        className="flex items-center flex-wrap gap-1 text-sm text-grey-50 mb-6"
+        className="flex items-center flex-wrap gap-1 text-sm text-text-secondary mb-6"
         aria-label="breadcrumb"
       >
         {breadcrumb.map((crumb, i) => (
           <React.Fragment key={crumb.href}>
-            {i > 0 && <span className="text-grey-30 mx-0.5">/</span>}
+            {i > 0 && <span className="text-text-secondary mx-0.5">/</span>}
             <Link
               href={crumb.href}
               className="hover:text-text-primary transition-colors no-underline"
@@ -25,15 +25,15 @@ export function ComingSoon({ breadcrumb, name }: ComingSoonProps) {
             </Link>
           </React.Fragment>
         ))}
-        <span className="text-grey-30 mx-0.5">/</span>
+        <span className="text-text-secondary mx-0.5">/</span>
         <span className="text-text-secondary">{name}</span>
       </nav>
 
       <h1 className="text-4xl font-bold text-text-primary mb-4">{name}</h1>
 
       <div className="mt-12 flex flex-col items-start gap-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-50 border border-yellow-200 text-sm text-yellow-900 font-medium">
-          <span className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-10 border border-yellow-100 text-sm text-yellow-dark font-medium">
+          <span className="h-2 w-2 rounded-full bg-yellow-100 animate-pulse" />
           Coming soon
         </div>
         <p className="text-text-secondary text-base leading-relaxed">

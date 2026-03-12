@@ -149,9 +149,9 @@ function SidebarTopSection({
       </button>
       {open && (
         <div className="ml-1">
-          {item.children!.map((child, i) =>
+          {item.children!.map((child) =>
             child.type === "category" ? (
-              <SidebarCategory key={i} item={child} pathname={pathname} />
+              <SidebarCategory key={child.label} item={child} pathname={pathname} />
             ) : (
               <SidebarLink
                 key={child.href}
@@ -185,9 +185,17 @@ export function DocsLayout({
 }: DocsLayoutProps) {
   const pathname = usePathname();
 
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   return (
     <TocProvider>
-      <div className={cn("min-h-screen flex flex-col", darkMode && "dark")}>
+      <div className="min-h-screen flex flex-col">
         {/* Top nav */}
         <header
           className="sticky top-0 z-40 h-14 flex items-center border-b border-border bg-surface px-6 gap-4"
