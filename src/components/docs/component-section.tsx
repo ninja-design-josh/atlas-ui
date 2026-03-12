@@ -90,7 +90,7 @@ export function ComponentSection({
           className="flex items-center flex-wrap gap-1 text-sm text-text-secondary mb-6"
         >
           {breadcrumb.map((crumb, i) => (
-            <React.Fragment key={crumb.href}>
+            <React.Fragment key={i}>
               {i > 0 && <span className="text-text-secondary mx-0.5">/</span>}
               <Link
                 href={crumb.href}

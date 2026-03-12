@@ -92,7 +92,7 @@ function SidebarCategory({
       <p className="px-3 mb-1 text-xs font-semibold text-grey-50 uppercase tracking-wider">
         {item.label}
       </p>
-      {item.children.map((child) => (
+      {item.children.filter((child) => child.status !== "coming-soon").map((child) => (
         <SidebarLink
           key={child.href}
           item={child}
@@ -271,7 +271,8 @@ export function DocsLayout({
           <aside className="w-56 shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto border-r border-border bg-surface py-4 px-2">
             <nav>
               {navItems.map((item, i) => {
-                if (item.type === "link")
+                if (item.type === "link") {
+                  if (item.status === "coming-soon") return null;
                   return (
                     <SidebarLink
                       key={item.href}
@@ -280,12 +281,32 @@ export function DocsLayout({
                       depth={0}
                     />
                   );
-                if (item.type === "category")
+                }
+                if (item.type === "category") {
+                  const visible = item.children.filter((c) => c.status !== "coming-soon");
+                  if (!visible.length) return null;
                   return (
-                    <SidebarCategory key={i} item={item} pathname={pathname} />
+                    <SidebarCategory key={i} item={{ ...item, children: visible }} pathname={pathname} />
                   );
+                }
+                // top-section: hide leaf sections with no href that are coming-soon stubs;
+                // for sections with children, hide if all children (and their grandchildren) are coming-soon
+                if (!item.children) {
+                  if (!item.href) return null;
+                  return (
+                    <SidebarTopSection key={i} item={item} pathname={pathname} />
+                  );
+                }
+                const visibleChildren = item.children
+                  .map((child) => {
+                    if (child.type === "link") return child.status !== "coming-soon" ? child : null;
+                    const visLinks = child.children.filter((l) => l.status !== "coming-soon");
+                    return visLinks.length ? { ...child, children: visLinks } : null;
+                  })
+                  .filter(Boolean) as typeof item.children;
+                if (!visibleChildren.length) return null;
                 return (
-                  <SidebarTopSection key={i} item={item} pathname={pathname} />
+                  <SidebarTopSection key={i} item={{ ...item, children: visibleChildren }} pathname={pathname} />
                 );
               })}
             </nav>
