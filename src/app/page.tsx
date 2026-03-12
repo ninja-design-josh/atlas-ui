@@ -23,6 +23,7 @@ import { PropsTable, type PropDef } from "@/components/docs/props-table";
 import { ComponentSection, DocSubheading } from "@/components/docs/component-section";
 import { LivePreview } from "@/components/docs/live-preview";
 import { DocsLayout, type NavItem } from "@/components/docs/docs-layout";
+import { SearchModal } from "@/components/docs/search-modal";
 
 // ─── Sidebar navigation ──────────────────────────────────────────────────────
 
@@ -395,6 +396,20 @@ const CARD_PROPS: PropDef[] = [
   { name: "children", type: "ReactNode", required: true, description: "Card content." },
 ];
 
+// ─── Search items ─────────────────────────────────────────────────────────────
+
+const SEARCH_ITEMS = [
+  { id: "button",   label: "Button",   description: "Action trigger — solid, outlined, ghost variants", type: "component" as const },
+  { id: "input",    label: "Input",    description: "Text input with label, hint, error, icon support", type: "component" as const },
+  { id: "textarea", label: "Textarea", description: "Multi-line text input",                             type: "component" as const },
+  { id: "select",   label: "Select",   description: "Native dropdown for fixed option lists",            type: "component" as const },
+  { id: "checkbox", label: "Checkbox", description: "Boolean toggle for form opt-ins",                  type: "component" as const },
+  { id: "switch",   label: "Switch",   description: "Immediate-effect boolean toggle",                  type: "component" as const },
+  { id: "badge",    label: "Badge",    description: "Status/label indicator with semantic variants",    type: "component" as const },
+  { id: "avatar",   label: "Avatar",   description: "User representation — image, initials, icon",     type: "component" as const },
+  { id: "card",     label: "Card",     description: "Surface container — compose with CardHeader etc.", type: "component" as const },
+];
+
 // ─── Demo data ────────────────────────────────────────────────────────────────
 
 const ROLE_OPTIONS = [
@@ -430,6 +445,19 @@ export default function Page() {
     }
   }
 
+  const [searchOpen, setSearchOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   const [inputValue, setInputValue] = React.useState("");
   const [passwordVisible, setPasswordVisible] = React.useState(false);
   const [checkboxA, setCheckboxA] = React.useState(false);
@@ -442,7 +470,7 @@ export default function Page() {
       navItems={NAV_ITEMS}
       darkMode={darkMode}
       onDarkModeToggle={toggleDark}
-      onSearchOpen={() => {}}
+      onSearchOpen={() => setSearchOpen(true)}
     >
 
           {/* Overview */}
@@ -935,6 +963,11 @@ export default function Page() {
             </div>
           </ComponentSection>
 
+      <SearchModal
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        items={SEARCH_ITEMS}
+      />
     </DocsLayout>
   );
 }
