@@ -26,7 +26,7 @@ export default function ButtonPage() {
       breadcrumb={[
         { label: "Home",       href: "/" },
         { label: "Components", href: "/components" },
-        { label: "Actions",    href: "/components" },
+        { label: "Actions",    href: "/components/actions" },
       ]}
       examples={[
         {
